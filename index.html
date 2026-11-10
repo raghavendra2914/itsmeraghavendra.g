@@ -29,16 +29,16 @@
 
   <style>
     :root {
-      --bg-core: #090b14;
-      --card-bg: rgba(18, 24, 42, 0.8);
-      --border-color: rgba(99, 102, 241, 0.3);
+      --bg-core: #12100e;
+      --card-bg: rgba(26, 22, 19, 0.85);
+      --border-color: rgba(197, 138, 93, 0.22);
     }
-    body { background-color: var(--bg-core); color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+    body { background-color: var(--bg-core); color: #f3f0ec; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     
     #preloader {
       position: fixed;
       inset: 0;
-      background: #090b14;
+      background: #12100e;
       z-index: 999;
       display: flex;
       flex-direction: column;
@@ -48,494 +48,436 @@
     }
     #preloader.fade-out { opacity: 0; visibility: hidden; }
 
-    .neon-blob {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(129, 140, 248, 0.2) 0%, rgba(236, 72, 153, 0.1) 50%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-      animation: floatBlob 7s ease-in-out infinite alternate;
-    }
-    @keyframes floatBlob {
-      0% { transform: translateY(0px) scale(1); }
-      100% { transform: translateY(50px) scale(1.15); }
-    }
-
-    .dribbble-card {
+    /* Editorial Bento Card Styling Matching Pinterest Layout */
+    .editorial-card {
       background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-color);
-      border-radius: 28px;
+      border-radius: 24px;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     }
-    .dribbble-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      border-color: rgba(236, 72, 153, 0.6);
-      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(236, 72, 153, 0.25);
+    .editorial-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(197, 138, 93, 0.6);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(197, 138, 93, 0.15);
     }
 
-    .electric-gradient {
-      background: linear-gradient(135deg, #818cf8 0%, #ec4899 50%, #38bdf8 100%);
+    .accent-gradient {
+      background: linear-gradient(135deg, #e0a96d 0%, #c58a5d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    @keyframes slideUpFade {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #c58a5d;
+      color: #12100e;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
     }
-    .animate-scroll {
-      animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
     #deepDiveModal {
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
     }
-    #deepDiveModal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    #deepDiveModal.active { opacity: 1; pointer-events: auto; }
     #deepDiveContent {
       transform: translateY(30px) scale(0.97);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    #deepDiveModal.active #deepDiveContent {
-      transform: translateY(0) scale(1);
-    }
+    #deepDiveModal.active #deepDiveContent { transform: translateY(0) scale(1); }
   </style>
 </head>
-<body class="min-h-screen selection:bg-pink-500 selection:text-white relative">
+<body class="min-h-screen selection:bg-[#c58a5d] selection:text-[#12100e] relative">
 
   <!-- Preloader -->
   <div id="preloader">
-    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pink-500 to-cyan-400 flex items-center justify-center text-white font-bold font-mono text-2xl shadow-2xl shadow-pink-500/30 animate-bounce mb-4">RG</div>
-    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Studio...</div>
+    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#c58a5d] to-[#e0a96d] flex items-center justify-center text-[#12100e] font-bold font-mono text-2xl shadow-2xl shadow-[#c58a5d]/30 animate-bounce mb-4">RG</div>
+    <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest animate-pulse">Loading Editorial Portfolio...</div>
   </div>
 
-  <div class="neon-blob top-10 left-10"></div>
-  <div class="neon-blob bottom-20 right-10" style="animation-delay: 3s;"></div>
+  <div id="toast"><i class="fa-solid fa-circle-check mr-2"></i>Copied to clipboard successfully!</div>
 
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 z-40 bg-[#090b14]/80 backdrop-blur-md border-b border-indigo-500/10">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold font-mono text-lg shadow-lg shadow-indigo-500/30">RG</div>
-        <span class="font-display font-bold text-white text-sm uppercase tracking-wider">Raghavendra G</span>
-      </div>
-      <nav class="hidden md:flex items-center gap-6 font-mono text-xs uppercase tracking-widest text-slate-400">
-        <a href="#hero" class="hover:text-pink-400 transition-colors">Overview</a>
-        <a href="#timeline" class="hover:text-pink-400 transition-colors">Timeline</a>
-        <a href="#calculator" class="hover:text-pink-400 transition-colors">ROI Calculator</a>
-        <a href="#experience" class="hover:text-pink-400 transition-colors">Experience</a>
-        <a href="#contact" class="hover:text-pink-400 transition-colors">Connect</a>
-      </nav>
-      <a href="tel:+919206692624" class="px-4 py-2 rounded-xl text-xs font-mono font-medium bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/20 transition-all">
-        +91 92066 92624
-      </a>
-    </div>
+  <!-- Top Header Bar -->
+  <header class="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-[#c58a5d]/15">
+    <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#a39e93]">Creative Portfolio</span>
+    <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#a39e93]"><span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping mr-2"></span>Available for Leadership</span>
   </header>
 
-  <main class="max-w-7xl mx-auto px-6 pt-32 pb-24 space-y-24 relative z-10">
+  <!-- MAIN EDITORIAL CONTAINER -->
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-10 relative z-10">
     
-    <!-- HERO SECTION WITH ORIGINAL FULL-HEIGHT PHOTO CARD -->
-    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh] animate-scroll">
-      <div class="lg:col-span-8 dribbble-card p-8 sm:p-12 space-y-8 flex flex-col justify-between">
-        <div class="space-y-6">
-          <div class="flex items-center justify-between flex-wrap gap-4">
-            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-400 font-mono text-xs uppercase tracking-widest">
-              <i class="fa-solid fa-bolt text-pink-400 animate-pulse"></i> Executive Sourcing Lead
-            </span>
-            <div class="flex items-center gap-2 font-mono text-xs text-slate-400">
-              <span class="flex h-2.5 w-2.5 relative">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-pink-500"></span>
-              </span>
-              <span>Available for Leadership Roles</span>
+    <!-- BIG BANNER & HERO SECTION -->
+    <section class="space-y-6">
+      <!-- Giant PORTFOLIO Title Banner matching Pinterest layout -->
+      <div class="text-center overflow-hidden py-2">
+        <h1 class="text-[12vw] sm:text-[11vw] font-display font-black tracking-tighter uppercase text-[#f3f0ec] leading-none opacity-90 select-none">
+          PORTFOLIO
+        </h1>
+      </div>
+
+      <!-- Top Profile Row: UI/UX & Web (Left) + Portrait & Name (Right) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left Box: Domain & Quote matching layout -->
+        <div class="lg:col-span-7 editorial-card p-8 sm:p-10 flex flex-col justify-between space-y-8">
+          <div class="space-y-4">
+            <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest font-bold">
+              Sourcing / Supply Chain / Operations
+            </div>
+            <div class="font-mono text-xs text-[#a39e93] uppercase tracking-wider space-y-1">
+              <div>Sourcing Strategy</div>
+              <div>APMC Mandi Ops</div>
+              <div>Dark Store Fulfillment</div>
             </div>
           </div>
 
-          <h1 class="text-4xl sm:text-6xl font-display font-black uppercase text-white tracking-tight leading-[1.1]">
-            SCALING <span class="electric-gradient">SUPPLY CHAINS</span> & FRESH PRODUCE.
-          </h1>
+          <div class="space-y-6 pt-6 border-t border-[#c58a5d]/15">
+            <div class="text-3xl text-[#c58a5d] font-serif leading-none">“</div>
+            <p class="text-xl sm:text-2xl font-serif italic text-[#f3f0ec] leading-snug">
+              I design robust supply chain networks that are resilient, direct, efficient, and impactful.
+            </p>
+            <div class="font-mono text-xs text-[#a39e93]">Raghavendra G</div>
+          </div>
+        </div>
 
-          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-            Elite F&V and FMCG Sourcing Lead with <span class="text-white font-semibold">9+ years of expertise</span> managing APMC mandi price discovery, direct collection center models, and dark-store fulfillment across Bangalore, Chennai, Hyderabad, and Mumbai.
+        <!-- Right Box: Portrait Photo & Executive Title -->
+        <div class="lg:col-span-5 editorial-card p-6 flex flex-col justify-between">
+          <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden relative border border-[#c58a5d]/20 bg-[#12100e]">
+            <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover filter contrast-110" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
+          </div>
+          <div class="pt-4 space-y-1 text-center">
+            <h2 class="text-2xl sm:text-3xl font-display font-bold uppercase text-[#f3f0ec] tracking-wide">Raghavendra G</h2>
+            <p class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Sourcing & Operations Lead</p>
+            <p class="text-xs text-[#a39e93] pt-2 font-normal leading-relaxed">
+              I'm an operations leader crafting clean, resilient agricultural and FMCG supply chain networks that scale efficiently.
+            </p>
+            
+            <!-- Key Stats Row matching Pinterest layout -->
+            <div class="grid grid-cols-3 gap-2 pt-4 border-t border-[#c58a5d]/15 font-mono">
+              <div class="text-center">
+                <div class="text-lg font-bold text-[#f3f0ec]">9+</div>
+                <div class="text-[10px] text-[#a39e93] uppercase">Years Exp</div>
+              </div>
+              <div class="text-center border-x border-[#c58a5d]/15">
+                <div class="text-lg font-bold text-[#f3f0ec]">50k+</div>
+                <div class="text-[10px] text-[#a39e93] uppercase">Tons Handled</div>
+              </div>
+              <div class="text-center">
+                <div class="text-lg font-bold text-[#f3f0ec]">99%</div>
+                <div class="text-[10px] text-[#a39e93] uppercase">Fulfillment</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHAT I DO / CORE COMPETENCIES -->
+    <section class="space-y-4">
+      <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">What I Do</div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <div class="editorial-card p-6 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
+            <i class="fa-solid fa-seedling text-sm"></i>
+          </div>
+          <h3 class="font-display font-bold text-sm uppercase text-[#f3f0ec]">Sourcing Strategy</h3>
+          <p class="text-xs text-[#a39e93] leading-relaxed">Direct APMC mandi price discovery and farmer collection center setups.</p>
+        </div>
+
+        <div class="editorial-card p-6 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
+            <i class="fa-solid fa-truck-fast text-sm"></i>
+          </div>
+          <h3 class="font-display font-bold text-sm uppercase text-[#f3f0ec]">Supply Chain</h3>
+          <p class="text-xs text-[#a39e93] leading-relaxed">End-to-end logistics and dark-store fulfillment management.</p>
+        </div>
+
+        <div class="editorial-card p-6 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
+            <i class="fa-solid fa-handshake text-sm"></i>
+          </div>
+          <h3 class="font-display font-bold text-sm uppercase text-[#f3f0ec]">Vendor Management</h3>
+          <p class="text-xs text-[#a39e93] leading-relaxed">Building trusted distributor and agricultural partner relationships.</p>
+        </div>
+
+        <div class="editorial-card p-6 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
+            <i class="fa-solid fa-boxes-stacked text-sm"></i>
+          </div>
+          <h3 class="font-display font-bold text-sm uppercase text-[#f3f0ec]">Inventory Control</h3>
+          <p class="text-xs text-[#a39e93] leading-relaxed">Minimizing wastage and maintaining optimal stock holding costs.</p>
+        </div>
+
+        <div class="editorial-card p-6 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
+            <i class="fa-solid fa-chart-line text-sm"></i>
+          </div>
+          <h3 class="font-display font-bold text-sm uppercase text-[#f3f0ec]">Margin Optimization</h3>
+          <p class="text-xs text-[#a39e93] leading-relaxed">Eliminating middlemen dependencies to maximize gross margins.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MY PROCESS & FEATURED WORK -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- My Process -->
+      <div class="lg:col-span-5 editorial-card p-8 space-y-6">
+        <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">My Process</div>
+        <div class="space-y-6 font-mono">
+          <div class="flex items-start gap-4">
+            <span class="text-[#c58a5d] text-lg font-bold">01</span>
+            <div>
+              <div class="font-bold text-sm text-[#f3f0ec] uppercase">Discover</div>
+              <div class="text-xs text-[#a39e93] pt-1">Understanding regional demand, price volatility, and project requirements.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#c58a5d] text-lg font-bold">02</span>
+            <div>
+              <div class="font-bold text-sm text-[#f3f0ec] uppercase">Define</div>
+              <div class="text-xs text-[#a39e93] pt-1">Structuring direct collection center models and vendor compliance baselines.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#c58a5d] text-lg font-bold">03</span>
+            <div>
+              <div class="font-bold text-sm text-[#f3f0ec] uppercase">Design</div>
+              <div class="text-xs text-[#a39e93] pt-1">Crafting lean, resilient logistics and cold-chain transit schedules.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#c58a5d] text-lg font-bold">04</span>
+            <div>
+              <div class="font-bold text-sm text-[#f3f0ec] uppercase">Develop</div>
+              <div class="text-xs text-[#a39e93] pt-1">Collaborating with operations teams to bring fulfillment networks live.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#c58a5d] text-lg font-bold">05</span>
+            <div>
+              <div class="font-bold text-sm text-[#f3f0ec] uppercase">Deliver</div>
+              <div class="text-xs text-[#a39e93] pt-1">Testing, refining, and scaling 99% SLA-compliant dark-store deliveries.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Work / Experience Grid -->
+      <div class="lg:col-span-7 editorial-card p-8 space-y-6">
+        <div class="flex items-center justify-between">
+          <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Featured Work & Experience</div>
+          <span class="font-mono text-xs text-[#a39e93]">Click role for Analytics →</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <div onclick="openDeepDive('kamadhenu')" class="editorial-card p-6 space-y-3 cursor-pointer group">
+            <div class="font-mono text-[10px] text-[#c58a5d]">08/2025 - Present</div>
+            <h3 class="font-display font-bold text-base text-[#f3f0ec] group-hover:text-[#c58a5d] transition-colors">Kamadhenu Fresh Farms</h3>
+            <div class="font-mono text-xs text-[#a39e93] uppercase">Sourcing Lead</div>
+            <p class="text-xs text-[#a39e93] leading-relaxed">Directing F&V sourcing strategy with 99% dark-store fulfillment.</p>
+          </div>
+
+          <div onclick="openDeepDive('gourmet')" class="editorial-card p-6 space-y-3 cursor-pointer group">
+            <div class="font-mono text-[10px] text-[#a39e93]">03/2023 - 03/2025</div>
+            <h3 class="font-display font-bold text-base text-[#f3f0ec] group-hover:text-[#c58a5d] transition-colors">Gourmet Garden</h3>
+            <div class="font-mono text-xs text-[#a39e93] uppercase">Sr. Sourcing Manager</div>
+            <p class="text-xs text-[#a39e93] leading-relaxed">Reduced market purchase ratio from 30% down to under 10%.</p>
+          </div>
+
+          <div onclick="openDeepDive('zomato')" class="editorial-card p-6 space-y-3 cursor-pointer group">
+            <div class="font-mono text-[10px] text-[#a39e93]">05/2022 - 12/2022</div>
+            <h3 class="font-display font-bold text-base text-[#f3f0ec] group-hover:text-[#c58a5d] transition-colors">Zomato Hyperpure</h3>
+            <div class="font-mono text-xs text-[#a39e93] uppercase">Area Sourcing Manager</div>
+            <p class="text-xs text-[#a39e93] leading-relaxed">Managed B2B supply chain reliability for HoReCa clients.</p>
+          </div>
+
+          <div onclick="openDeepDive('edlp')" class="editorial-card p-6 space-y-3 cursor-pointer group">
+            <div class="font-mono text-[10px] text-[#a39e93]">05/2020 - 02/2022</div>
+            <h3 class="font-display font-bold text-base text-[#f3f0ec] group-hover:text-[#c58a5d] transition-colors">EDLP Retail Solutions</h3>
+            <div class="font-mono text-xs text-[#a39e93] uppercase">Sourcing & Category Manager</div>
+            <p class="text-xs text-[#a39e93] leading-relaxed">Managed 5,000+ FMCG SKUs across 50+ brand distributors.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ABOUT ME & TOOLS I USE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      
+      <!-- About Me -->
+      <div class="lg:col-span-7 editorial-card p-8 space-y-6 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">About Me</div>
+          <h3 class="text-2xl font-display font-bold text-[#f3f0ec]">Driven by operational rigor & fresh produce excellence.</h3>
+          <p class="text-sm text-[#a39e93] leading-relaxed">
+            I believe great supply chain management is not just about moving goods from A to B, but building predictable, transparent, and high-margin agricultural ecosystems.
           </p>
         </div>
-
-        <div class="flex flex-wrap gap-4 pt-6 border-t border-indigo-500/20">
-          <a href="#experience" class="px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-mono font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all shadow-xl shadow-pink-500/25">Explore Experience</a>
-          <a href="#contact" class="px-8 py-4 rounded-xl border border-indigo-500/30 text-slate-200 font-mono font-bold text-xs uppercase tracking-widest hover:border-pink-500 transition-all">Get in Touch</a>
-          <a href="#contact" onclick="alert('Please contact via email for executive CV download link.')" class="px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-slate-300 font-mono font-bold text-xs uppercase tracking-widest hover:border-indigo-400 transition-all flex items-center gap-2">
-            <i class="fa-solid fa-file-arrow-down text-pink-400"></i> Download CV
-          </a>
+        <div class="space-y-2 font-mono text-xs text-[#f3f0ec] pt-4 border-t border-[#c58a5d]/15">
+          <div class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c58a5d]"></i> Detail oriented execution</div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c58a5d]"></i> Cross-functional team leadership</div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c58a5d]"></i> Pan-India vendor network expansion</div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c58a5d]"></i> Fluent in English, Kannada, Hindi, Telugu, Tamil</div>
         </div>
       </div>
 
-      <!-- ORIGINAL FULL SCREEN PHOTO CARD -->
-      <div class="lg:col-span-4 dribbble-card p-3 flex flex-col items-center justify-center group h-full min-h-[500px]">
-        <div class="w-full h-full rounded-2xl overflow-hidden relative">
-          <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover rounded-2xl filter contrast-110 group-hover:scale-105 transition-transform duration-700" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#090b14] via-transparent to-transparent opacity-60"></div>
-          <div class="absolute bottom-4 left-4 right-4 text-center">
-            <span class="px-4 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/40 text-indigo-300 font-mono text-xs uppercase tracking-wider backdrop-blur-md">
-              Raghavendra G • Sourcing Lead
-            </span>
+      <!-- Tools & Stack -->
+      <div class="lg:col-span-5 editorial-card p-8 space-y-6 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Tools & Stack</div>
+          <div class="grid grid-cols-3 gap-3 font-mono text-xs">
+            <div class="p-3 rounded-xl bg-[#12100e] border border-[#c58a5d]/20 text-center">
+              <i class="fa-solid fa-file-excel text-[#c58a5d] text-lg mb-1"></i>
+              <div>Advanced ERP</div>
+            </div>
+            <div class="p-3 rounded-xl bg-[#12100e] border border-[#c58a5d]/20 text-center">
+              <i class="fa-solid fa-chart-column text-[#c58a5d] text-lg mb-1"></i>
+              <div>Power BI / SQL</div>
+            </div>
+            <div class="p-3 rounded-xl bg-[#12100e] border border-[#c58a5d]/20 text-center">
+              <i class="fa-solid fa-calculator text-[#c58a5d] text-lg mb-1"></i>
+              <div>P&L Modeling</div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- TIMELINE SECTION -->
-    <section id="timeline" class="dribbble-card p-8 sm:p-12 space-y-8 animate-scroll">
-      <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
-        <div>
-          <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Career Evolution</span>
-          <h2 class="text-3xl font-display font-bold text-white mt-1">Milestone Timeline</h2>
+        <div class="p-4 rounded-xl bg-[#c58a5d]/10 border border-[#c58a5d]/30 text-xs text-[#f3f0ec] font-mono italic">
+          "Raghavendra is an exceptional operator who delivers outstanding results on time and understands supply chain dynamics like no one else." — <span class="text-[#c58a5d]">Industry Peer</span>
         </div>
-        <span class="text-xs font-mono text-slate-400">2017 - Present</span>
       </div>
+
+    </div>
+
+    <!-- LET'S COLLABORATE & SCAN TO CONNECT (MATCHING PINTEREST FOOTER) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
       
-      <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
-          <div class="font-mono text-xs text-pink-400">2017 - 2020</div>
-          <div class="font-bold text-white text-sm">Ninjacart</div>
-          <div class="text-xs text-slate-400">Sourcing Senior Executive</div>
-        </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
-          <div class="font-mono text-xs text-indigo-400">2020 - 2022</div>
-          <div class="font-bold text-white text-sm">EDLP Retail</div>
-          <div class="text-xs text-slate-400">Category Manager</div>
-        </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
-          <div class="font-mono text-xs text-cyan-400">2022 - 2022</div>
-          <div class="font-bold text-white text-sm">Zomato Hyperpure</div>
-          <div class="text-xs text-slate-400">Area Sourcing Manager</div>
-        </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
-          <div class="font-mono text-xs text-pink-400">2023 - 2025</div>
-          <div class="font-bold text-white text-sm">Gourmet Garden</div>
-          <div class="text-xs text-slate-400">Sr. Sourcing Manager</div>
-        </div>
-        <div class="p-4 rounded-xl bg-gradient-to-tr from-indigo-500/20 to-pink-500/20 border border-pink-500/60 space-y-2 shadow-lg hover:scale-105 transition-transform">
-          <div class="font-mono text-xs text-pink-300">2025 - Present</div>
-          <div class="font-bold text-white text-sm">Kamadhenu Fresh</div>
-          <div class="text-xs text-slate-300">Sourcing Lead</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ROI CALCULATOR SECTION -->
-    <section id="calculator" class="dribbble-card p-8 sm:p-12 space-y-8 border border-pink-500/30 animate-scroll">
-      <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
-        <div>
-          <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Value Simulator</span>
-          <h2 class="text-3xl font-display font-bold text-white mt-1">Supply Chain Margin & ROI Calculator</h2>
-        </div>
-        <span class="text-xs font-mono text-slate-400">Interactive Tool</span>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        <div class="space-y-6">
-          <div class="space-y-2">
-            <label class="block font-mono text-xs text-slate-300">Monthly Produce Volume Managed (Tons): <span id="tonVal" class="text-pink-400 font-bold">250</span>T</label>
-            <input type="range" id="tonSlider" min="50" max="1000" value="250" step="25" class="w-full accent-pink-500 cursor-pointer" oninput="calculateROI()">
-          </div>
-          <div class="space-y-2">
-            <label class="block font-mono text-xs text-slate-300">Average Procurement Budget (₹ Lakhs/Month): <span id="budVal" class="text-indigo-400 font-bold">50</span> Lakhs</label>
-            <input type="range" id="budSlider" min="10" max="300" value="50" step="10" class="w-full accent-indigo-500 cursor-pointer" oninput="calculateROI()">
-          </div>
-          <p class="text-xs text-slate-400 font-mono">Calculates estimated savings based on direct collection center optimization and reducing market purchase dependencies from 30% to &lt;10%.</p>
-        </div>
-
-        <div class="p-8 rounded-2xl bg-white/5 border border-indigo-500/30 flex flex-col justify-center items-center text-center space-y-4">
-          <div class="font-mono text-xs text-slate-400 uppercase tracking-widest">Estimated Monthly Margin Savings</div>
-          <div id="savingsOutput" class="text-4xl sm:text-5xl font-extrabold electric-gradient font-mono">₹ 7.5 Lakhs</div>
-          <div class="text-xs text-slate-300 font-mono">Projected Annual Efficiency Impact: <span id="annualOutput" class="text-pink-400 font-bold">₹ 90 Lakhs</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE SECTION -->
-    <section id="experience" class="space-y-8 pt-6 animate-scroll">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-indigo-500/20 pb-6">
-        <div>
-          <span class="text-xs font-mono text-indigo-400 uppercase tracking-widest">02. Career Trajectory</span>
-          <h2 class="text-3xl font-display font-bold text-white mt-1">Professional Experience & Leadership</h2>
-        </div>
-        <span class="text-xs font-mono text-pink-300 bg-pink-500/10 px-4 py-2 rounded-xl border border-pink-500/30">Click any role to launch Deep Dive Analytics →</span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-7 editorial-card p-8 space-y-6">
+        <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Let's Collaborate</div>
+        <h3 class="text-2xl font-display font-bold text-[#f3f0ec]">Have a project in mind or want to discuss leadership?</h3>
+        <p class="text-sm text-[#a39e93]">I'd love to hear from you. Reach out directly through any channel below.</p>
         
-        <!-- Kamadhenu -->
-        <div onclick="openDeepDive('kamadhenu')" class="dribbble-card p-8 space-y-4 cursor-pointer group flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono text-pink-400">
-              <span>08/2025 - Present</span>
-              <span class="px-2.5 py-1 rounded bg-pink-500/10 text-pink-300">Current Role</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-white group-hover:text-pink-400 transition-colors">Kamadhenu Fresh Farms</h3>
-            <p class="text-xs font-mono text-slate-400 uppercase tracking-widest">Sourcing Lead</p>
-            <p class="text-slate-300 text-sm leading-relaxed">
-              Directing end-to-end sourcing strategy for Watermelon Kiran & Taiwan Guava with 99% dark-store fulfillment.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-indigo-500/20 flex items-center justify-between text-xs font-mono text-pink-400 font-bold">
-            <span>View Analytics & Graphs</span>
-            <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- Gourmet Garden -->
-        <div onclick="openDeepDive('gourmet')" class="dribbble-card p-8 space-y-4 cursor-pointer group flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>03/2023 - 03/2025</span>
-              <span>2 Years</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-white group-hover:text-pink-400 transition-colors">Gourmet Garden</h3>
-            <p class="text-xs font-mono text-slate-400 uppercase tracking-widest">Sr. Sourcing Manager</p>
-            <p class="text-slate-300 text-sm leading-relaxed">
-              Optimized direct collection center models, reducing market purchase contribution from 30% down to under 10%.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-indigo-500/20 flex items-center justify-between text-xs font-mono text-pink-400 font-bold">
-            <span>View Analytics & Graphs</span>
-            <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- Zomato -->
-        <div onclick="openDeepDive('zomato')" class="dribbble-card p-8 space-y-4 cursor-pointer group flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>05/2022 - 12/2022</span>
-              <span>8 Months</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-white group-hover:text-pink-400 transition-colors">Zomato Hyperpure</h3>
-            <p class="text-xs font-mono text-slate-400 uppercase tracking-widest">Area Sourcing Manager</p>
-            <p class="text-slate-300 text-sm leading-relaxed">
-              Executed structured Collection Center projects and managed B2B supply chain reliability for HoReCa clients.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-indigo-500/20 flex items-center justify-between text-xs font-mono text-pink-400 font-bold">
-            <span>View Analytics & Graphs</span>
-            <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- EDLP Retail -->
-        <div onclick="openDeepDive('edlp')" class="dribbble-card p-8 space-y-4 cursor-pointer group flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>05/2020 - 02/2022</span>
-              <span>1 Yr 10 Mos</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-white group-hover:text-pink-400 transition-colors">EDLP Retail Solutions</h3>
-            <p class="text-xs font-mono text-slate-400 uppercase tracking-widest">Sourcing & Category Manager</p>
-            <p class="text-slate-300 text-sm leading-relaxed">
-              Managed 5,000+ FMCG SKUs, maintaining 95% acquisition success rate across 50+ leading brand distributors.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-indigo-500/20 flex items-center justify-between text-xs font-mono text-pink-400 font-bold">
-            <span>View Analytics & Graphs</span>
-            <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- Ninjacart -->
-        <div onclick="openDeepDive('ninjacart')" class="dribbble-card p-8 space-y-4 cursor-pointer group flex flex-col justify-between">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>04/2017 - 04/2020</span>
-              <span>3 Years</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-white group-hover:text-pink-400 transition-colors">Ninjacart</h3>
-            <p class="text-xs font-mono text-slate-400 uppercase tracking-widest">Sourcing Senior Executive</p>
-            <p class="text-slate-300 text-sm leading-relaxed">
-              Scaled onion procurement to 250 tons for weekend sales across multiple regional fulfillment hubs.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-indigo-500/20 flex items-center justify-between text-xs font-mono text-pink-400 font-bold">
-            <span>View Analytics & Graphs</span>
-            <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CORE COMPETENCIES SECTION -->
-    <section id="competencies" class="dribbble-card p-8 sm:p-12 space-y-8 animate-scroll">
-      <div>
-        <span class="text-xs font-mono text-indigo-400 uppercase tracking-widest">03. Expertise & Operations</span>
-        <h2 class="text-3xl font-display font-bold text-white mt-1">Core Competencies, Skills & Languages</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-4">
-          <h3 class="font-mono text-sm text-pink-400 uppercase tracking-wider">Strategic Domains</h3>
-          <div class="flex flex-wrap gap-2 font-mono text-xs uppercase">
-            <span class="px-3 py-1.5 rounded-xl bg-pink-500/10 text-pink-300 border border-pink-500/30">Sourcing Strategy</span>
-            <span class="px-3 py-1.5 rounded-xl bg-white/5 text-slate-300 border border-white/10">Vendor Management</span>
-            <span class="px-3 py-1.5 rounded-xl bg-white/5 text-slate-300 border border-white/10">APMC Mandi Ops</span>
-            <span class="px-3 py-1.5 rounded-xl bg-white/5 text-slate-300 border border-white/10">Inventory Control</span>
-            <span class="px-3 py-1.5 rounded-xl bg-white/5 text-slate-300 border border-white/10">Quality Assurance</span>
-            <span class="px-3 py-1.5 rounded-xl bg-white/5 text-slate-300 border border-white/10">F&V & FMCG</span>
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-4">
-          <h3 class="font-mono text-sm text-indigo-300 uppercase tracking-wider">Operational Scale</h3>
-          <ul class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-indigo-400 mt-1 shrink-0"></i>
-              <span>Pan-India Sourcing Networks across Bangalore, Chennai, Hyderabad, and Mumbai.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-indigo-400 mt-1 shrink-0"></i>
-              <span>Direct Farmer Collection Center setup & supply chain optimization.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-indigo-400 mt-1 shrink-0"></i>
-              <span>Q-Commerce dark-store fulfillment & strict SLA management.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-4">
-          <h3 class="font-mono text-sm text-cyan-300 uppercase tracking-wider">Languages Known</h3>
-          <div class="space-y-3 text-xs sm:text-sm text-slate-300">
-            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
-              <span class="font-medium text-white">English</span>
-              <span class="font-mono text-cyan-400 text-xs">Professional</span>
-            </div>
-            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
-              <span class="font-medium text-white">Kannada (ಕನ್ನಡ)</span>
-              <span class="font-mono text-cyan-400 text-xs">Native</span>
-            </div>
-            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
-              <span class="font-medium text-white">Hindi (हिन्दी)</span>
-              <span class="font-mono text-cyan-400 text-xs">Fluent</span>
-            </div>
-            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
-              <span class="font-medium text-white">Telugu / Tamil</span>
-              <span class="font-mono text-cyan-400 text-xs">Conversational</span>
-            </div>
+        <div class="space-y-3 font-mono text-xs text-[#f3f0ec]">
+          <button onclick="copyToClipboard('raghavendra.g0429@gmail.com')" class="flex items-center gap-3 p-3 rounded-xl bg-[#12100e] border border-[#c58a5d]/20 hover:border-[#c58a5d] transition-all w-full text-left cursor-pointer">
+            <i class="fa-solid fa-envelope text-[#c58a5d]"></i>
+            <span>raghavendra.g0429@gmail.com</span>
+          </button>
+          <button onclick="copyToClipboard('+91 92066 92624')" class="flex items-center gap-3 p-3 rounded-xl bg-[#12100e] border border-[#c58a5d]/20 hover:border-[#c58a5d] transition-all w-full text-left cursor-pointer">
+            <i class="fa-solid fa-phone text-[#c58a5d]"></i>
+            <span>+91 92066 92624</span>
+          </button>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-[#12100e] border border-[#c58a5d]/20">
+            <i class="fa-solid fa-location-dot text-[#c58a5d]"></i>
+            <span>Bengaluru, Karnataka, India</span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- TESTIMONIALS SECTION -->
-    <section class="dribbble-card p-8 sm:p-12 space-y-6 animate-scroll">
-      <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
-        <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Leadership & Stakeholder Endorsements</h3>
-        <span class="text-xs font-mono text-slate-400">Verified Feedback</span>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-3">
-          <p class="text-slate-300 text-sm italic">"Raghavendra's command over direct collection center procurement and APMC price discovery transformed our gross margins and reduced dependency on market intermediaries."</p>
-          <div class="font-mono text-xs text-pink-400 font-bold">— Fresh Produce Supply Chain Partner</div>
+      <div class="lg:col-span-5 editorial-card p-8 flex flex-col justify-between text-center space-y-6">
+        <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Scan to Connect</div>
+        <div class="flex justify-center gap-6">
+          <div class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30">
+            <i class="fa-brands fa-linkedin text-[#c58a5d] text-4xl mb-2"></i>
+            <div class="font-mono text-[10px] text-[#a39e93]">LinkedIn</div>
+          </div>
+          <div class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30">
+            <i class="fa-brands fa-instagram text-[#c58a5d] text-4xl mb-2"></i>
+            <div class="font-mono text-[10px] text-[#a39e93]">Instagram</div>
+          </div>
         </div>
-        <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-3">
-          <p class="text-slate-300 text-sm italic">"Exceptional execution capability during high-demand volume surges and robust dark-store SLA management across metropolitan fulfillment hubs."</p>
-          <div class="font-mono text-xs text-indigo-400 font-bold">— Operations Leadership Colleague</div>
+        <div class="font-display font-bold uppercase tracking-widest text-xs text-[#a39e93] pt-4 border-t border-[#c58a5d]/15">
+          Designing Experiences. Building Connections.
         </div>
       </div>
-    </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="dribbble-card p-10 sm:p-14 text-center space-y-8 border border-pink-500/30 animate-scroll">
-      <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">04. Connect & Collaborate</span>
-      <h2 class="text-4xl font-display font-bold text-white">Let's Discuss Sourcing Leadership</h2>
-      <p class="text-slate-300 text-base max-w-xl mx-auto">Ready to scale supply chains, optimize procurement margins, and drive operational excellence? Reach out directly.</p>
-      
-      <div class="flex flex-wrap justify-center gap-6 pt-4 font-mono text-sm">
-        <a href="tel:+919206692624" class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500 hover:bg-indigo-500/10 transition-all flex items-center gap-3 text-slate-100 shadow-lg">
-          <i class="fa-solid fa-phone text-indigo-400"></i> +91 92066 92624
-        </a>
-        <a href="mailto:raghavendra.g0429@gmail.com" class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500 hover:bg-pink-500/10 transition-all flex items-center gap-3 text-slate-100 shadow-lg truncate">
-          <i class="fa-solid fa-envelope text-pink-400"></i> raghavendra.g0429@gmail.com
-        </a>
-      </div>
-    </section>
+    </div>
 
   </main>
 
   <!-- IMMERSIVE FULL-SCREEN DEEP DIVE MODAL -->
-  <div id="deepDiveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-xl p-4 sm:p-6 lg:p-10 overflow-y-auto">
-    <div id="deepDiveContent" class="dribbble-card max-w-5xl w-full p-6 sm:p-10 space-y-8 relative border border-pink-500/50 shadow-2xl my-auto">
+  <div id="deepDiveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#12100e]/90 backdrop-blur-xl p-4 sm:p-6 lg:p-10 overflow-y-auto">
+    <div id="deepDiveContent" class="editorial-card max-w-5xl w-full p-6 sm:p-10 space-y-8 relative border border-[#c58a5d]/50 shadow-2xl my-auto">
       
-      <button onclick="closeDeepDive()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-pink-500/20 hover:text-pink-400 flex items-center justify-center text-white transition-all text-lg">
+      <button onclick="closeDeepDive()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#12100e] hover:bg-[#c58a5d]/20 hover:text-[#c58a5d] flex items-center justify-center text-[#f3f0ec] transition-all text-lg cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
       <div class="space-y-2 pr-12">
-        <span id="modalDateBadge" class="px-3 py-1 rounded-full bg-pink-500/10 text-pink-400 font-mono text-xs font-semibold"></span>
-        <h2 id="modalCompanyName" class="text-3xl sm:text-4xl font-display font-extrabold text-white"></h2>
-        <p id="modalRoleTitle" class="text-sm font-mono text-slate-400 uppercase tracking-widest"></p>
+        <span id="modalDateBadge" class="px-3 py-1 rounded-full bg-[#c58a5d]/10 text-[#c58a5d] font-mono text-xs font-semibold"></span>
+        <h2 id="modalCompanyName" class="text-3xl sm:text-4xl font-display font-extrabold text-[#f3f0ec]"></h2>
+        <p id="modalRoleTitle" class="text-sm font-mono text-[#a39e93] uppercase tracking-widest"></p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 space-y-4">
-          <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Executive Summary</h3>
-          <p id="modalDescriptionText" class="text-slate-300 text-sm sm:text-base leading-relaxed"></p>
-          <div class="p-4 rounded-2xl bg-pink-500/10 border border-pink-500/20 space-y-1">
-            <span class="text-xs font-mono font-bold text-pink-300 uppercase">Key Operational Milestone</span>
-            <p id="modalMilestoneText" class="text-xs sm:text-sm text-slate-200"></p>
+          <h3 class="text-xs font-mono text-[#c58a5d] uppercase tracking-widest">Executive Summary</h3>
+          <p id="modalDescriptionText" class="text-[#a39e93] text-sm sm:text-base leading-relaxed"></p>
+          <div class="p-4 rounded-2xl bg-[#c58a5d]/10 border border-[#c58a5d]/20 space-y-1">
+            <span class="text-xs font-mono font-bold text-[#c58a5d] uppercase">Key Operational Milestone</span>
+            <p id="modalMilestoneText" class="text-xs sm:text-sm text-[#f3f0ec]"></p>
           </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between space-y-4">
-          <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Performance KPI</h3>
+        <div class="p-6 rounded-2xl bg-[#12100e] border border-[#c58a5d]/20 flex flex-col justify-between space-y-4">
+          <h3 class="text-xs font-mono text-[#c58a5d] uppercase tracking-widest">Performance KPI</h3>
           <div class="text-center space-y-1">
-            <div id="modalMetricValue" class="text-4xl sm:text-5xl font-extrabold electric-gradient font-mono"></div>
-            <div id="modalMetricLabel" class="text-xs text-slate-400 font-mono"></div>
+            <div id="modalMetricValue" class="text-4xl sm:text-5xl font-extrabold accent-gradient font-mono"></div>
+            <div id="modalMetricLabel" class="text-xs text-[#a39e93] font-mono"></div>
           </div>
-          <div class="text-[11px] font-mono text-slate-500 text-center">Verified Sourcing Data</div>
+          <div class="text-[11px] font-mono text-[#a39e93] text-center">Verified Sourcing Data</div>
         </div>
       </div>
 
-      <div class="space-y-4 pt-4 border-t border-indigo-500/20">
+      <div class="space-y-4 pt-4 border-t border-[#c58a5d]/20">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Operational Analytics & Volume Growth</h3>
-          <span class="text-xs font-mono text-slate-400">Interactive Visualization</span>
+          <h3 class="text-xs font-mono text-[#c58a5d] uppercase tracking-widest">Operational Analytics & Volume Growth</h3>
+          <span class="text-xs font-mono text-[#a39e93]">Interactive Visualization</span>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-4 rounded-2xl bg-white/5 border border-indigo-500/20">
+          <div class="p-4 rounded-2xl bg-[#12100e] border border-[#c58a5d]/20">
             <canvas id="performanceChart" height="140"></canvas>
           </div>
-          <div class="p-4 rounded-2xl bg-white/5 border border-indigo-500/20">
+          <div class="p-4 rounded-2xl bg-[#12100e] border border-[#c58a5d]/20">
             <canvas id="efficiencyChart" height="140"></canvas>
           </div>
         </div>
       </div>
 
-      <div class="pt-4 flex justify-end gap-4 border-t border-indigo-500/20">
-        <button onclick="closeDeepDive()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-mono font-bold text-xs uppercase hover:brightness-110 transition-all shadow-lg shadow-pink-500/20">Close Dashboard</button>
+      <div class="pt-4 flex justify-end gap-4 border-t border-[#c58a5d]/20">
+        <button onclick="closeDeepDive()" class="px-8 py-3 rounded-xl bg-[#c58a5d] text-[#12100e] font-mono font-bold text-xs uppercase hover:brightness-110 transition-all shadow-lg shadow-[#c58a5d]/20 cursor-pointer">Close Dashboard</button>
       </div>
 
     </div>
   </div>
 
-  <footer class="max-w-7xl mx-auto mt-16 pt-8 border-t border-indigo-500/20 text-center text-xs text-slate-500 font-mono relative z-10 flex flex-col sm:flex-row justify-between items-center gap-4 px-6 pb-12">
-    <div>© 2026 Raghavendra G. All rights reserved.</div>
-    <div class="flex gap-6">
-      <a href="https://www.linkedin.com/in/raghavendra-g-164561166" target="_blank" class="hover:text-white">LinkedIn</a>
-      <a href="https://instagram.com/Itsmeraghavendra.g" target="_blank" class="hover:text-white">Instagram</a>
-      <a href="https://twitter.com/Raghavendragps" target="_blank" class="hover:text-white">X</a>
-    </div>
+  <!-- Footer -->
+  <footer class="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#c58a5d]/15 text-center text-xs text-[#a39e93] font-mono pb-12">
+    <div>© 2026 Raghavendra G. All rights reserved. Designed in Pinterest Editorial Style.</div>
   </footer>
 
   <script>
@@ -545,18 +487,13 @@
       }, 400);
     });
 
-    // ROI Calculator
-    function calculateROI() {
-      const tons = document.getElementById('tonSlider').value;
-      const budget = document.getElementById('budSlider').value;
-      document.getElementById('tonVal').innerText = tons;
-      document.getElementById('budVal').innerText = budget;
-
-      const monthlySavings = (budget * 0.15).toFixed(1);
-      const annualSavings = (monthlySavings * 12).toFixed(1);
-
-      document.getElementById('savingsOutput').innerText = `₹ ${monthlySavings} Lakhs`;
-      document.getElementById('annualOutput').innerText = `₹ ${annualSavings} Lakhs`;
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
     }
 
     const database = {
@@ -611,19 +548,6 @@
         chart1Label: "Acquisition Success (%)",
         chart2Data: [1000, 2000, 3500, 4200, 5000],
         chart2Label: "FMCG SKUs Managed"
-      },
-      ninjacart: {
-        date: "04/2017 - 04/2020",
-        name: "Ninjacart",
-        role: "Sourcing Senior Executive",
-        desc: "Scaled onion procurement to 250 tons for weekend sales across multiple regional fulfillment hubs and trained multi-city vendor operational teams.",
-        milestone: "Successfully executed massive volume surges (250 tons of onions) during high-demand weekend promotional events without stockouts.",
-        metricVal: "250T",
-        metricLbl: "Weekend Onion Procurement",
-        chart1Data: [50, 90, 140, 190, 250],
-        chart1Label: "Onion Volume Surge (Tons)",
-        chart2Data: [88, 92, 95, 98, 100],
-        chart2Label: "Vendor Team Efficiency (%)"
       }
     };
 
@@ -654,8 +578,8 @@
           datasets: [{
             label: data.chart1Label,
             data: data.chart1Data,
-            borderColor: '#ec4899',
-            backgroundColor: 'rgba(236, 72, 153, 0.1)',
+            borderColor: '#c58a5d',
+            backgroundColor: 'rgba(197, 138, 93, 0.1)',
             borderWidth: 3,
             fill: true,
             tension: 0.4
@@ -663,10 +587,10 @@
         },
         options: {
           responsive: true,
-          plugins: { legend: { labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } } },
+          plugins: { legend: { labels: { color: '#a39e93', font: { family: 'JetBrains Mono', size: 10 } } } },
           scales: {
-            x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            x: { ticks: { color: '#a39e93' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#a39e93' }, grid: { color: 'rgba(255,255,255,0.05)' } }
           }
         }
       });
@@ -679,16 +603,16 @@
           datasets: [{
             label: data.chart2Label,
             data: data.chart2Data,
-            backgroundColor: '#818cf8',
+            backgroundColor: '#e0a96d',
             borderRadius: 8
           }]
         },
         options: {
           responsive: true,
-          plugins: { legend: { labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } } },
+          plugins: { legend: { labels: { color: '#a39e93', font: { family: 'JetBrains Mono', size: 10 } } } },
           scales: {
-            x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            x: { ticks: { color: '#a39e93' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#a39e93' }, grid: { color: 'rgba(255,255,255,0.05)' } }
           }
         }
       });
