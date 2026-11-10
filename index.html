@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -17,8 +17,7 @@
       theme: {
         extend: {
           fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace']
           }
         }
@@ -27,130 +26,135 @@
   </script>
 
   <style>
-    body { background-color: #05070a; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    :root {
+      --bg-core: #03070f;
+      --card-bg: rgba(13, 20, 36, 0.7);
+      --border-color: rgba(20, 184, 166, 0.15);
+      --accent-glow: rgba(20, 184, 166, 0.12);
+    }
+    body { background-color: var(--bg-core); color: #f1f5f9; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     
-    /* Animated Bento Cards */
-    .bento-card {
-      background: rgba(15, 20, 32, 0.85);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 100, 0, 0.15);
+    .bento-box {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
       border-radius: 24px;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
     }
-    .bento-card::before {
+    .bento-box::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 90, 0, 0.08), transparent 40%);
+      background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(20, 184, 166, 0.12), transparent 50%);
       opacity: 0;
-      transition: opacity 0.4s;
+      transition: opacity 0.4s ease;
       pointer-events: none;
     }
-    .bento-card:hover::before { opacity: 1; }
-    .bento-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255, 100, 0, 0.5);
-      box-shadow: 0 20px 40px rgba(255, 80, 0, 0.15);
+    .bento-box:hover::before { opacity: 1; }
+    .bento-box:hover {
+      transform: translateY(-5px);
+      border-color: rgba(20, 184, 166, 0.4);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(20, 184, 166, 0.08);
     }
-    .accent-gradient {
-      background: linear-gradient(135deg, #FF5500 0%, #FF2255 100%);
+    .emerald-gradient {
+      background: linear-gradient(135deg, #2dd4bf 0%, #06b6d4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .ambient-glow {
+    .ambient-light {
       position: absolute;
       width: 700px;
       height: 700px;
-      background: radial-gradient(circle, rgba(255, 85, 0, 0.12) 0%, rgba(220, 38, 38, 0.03) 50%, transparent 70%);
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, rgba(6, 182, 212, 0.03) 50%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-orange-600 selection:text-white p-4 sm:p-6 lg:p-10 relative">
+<body class="min-h-screen selection:bg-teal-500 selection:text-slate-950 p-4 sm:p-6 lg:p-10 relative">
 
-  <div class="ambient-glow top-0 left-1/2 -translate-x-1/2"></div>
+  <div class="ambient-light top-0 left-1/2 -translate-x-1/2"></div>
 
-  <!-- Bento Dashboard Container -->
+  <!-- Bento Dashboard Grid -->
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 relative z-10">
 
-    <!-- 1. Profile & Status Header Card -->
-    <div class="bento-card p-6 flex flex-col justify-between">
+    <!-- 1. Header & Live Status Card -->
+    <div class="bento-box p-6 flex flex-col justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-600 to-red-600 flex items-center justify-center text-white font-bold font-mono text-xl shadow-lg shadow-orange-600/30">RG</div>
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 font-bold font-mono text-xl shadow-lg shadow-teal-500/20">RG</div>
         <div>
           <h2 class="font-bold text-white text-base">Raghavendra G</h2>
-          <span class="text-xs font-mono text-orange-400">@itsmeraghavendra.g</span>
+          <span class="text-xs font-mono text-teal-400">@itsmeraghavendra.g</span>
         </div>
       </div>
       <div class="mt-8 space-y-2 border-t border-white/10 pt-5">
         <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-          <span>Live Status</span>
+          <span>Status</span>
           <span class="flex h-2.5 w-2.5 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
           </span>
         </div>
         <div class="text-sm font-bold text-white uppercase tracking-wider">Open for Sourcing Leadership</div>
       </div>
     </div>
 
-    <!-- 2. Main Hero Headline Card -->
-    <div class="md:col-span-2 lg:col-span-2 bento-card p-8 flex flex-col justify-between">
+    <!-- 2. Main Executive Headline Card -->
+    <div class="md:col-span-2 lg:col-span-2 bento-box p-8 flex flex-col justify-between">
       <div>
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 font-mono text-xs uppercase tracking-widest">
-          <i class="fa-solid fa-crown text-orange-400"></i> Executive Sourcing Lead
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-400 font-mono text-xs uppercase tracking-widest">
+          <i class="fa-solid fa-seedling text-teal-400"></i> Executive Sourcing Lead
         </span>
-        <h1 class="text-3xl sm:text-4xl font-display font-black uppercase text-white tracking-tight mt-4 leading-tight">
-          SCALING <span class="accent-gradient">SUPPLY CHAINS</span> & FRESH PRODUCE.
+        <h1 class="text-3xl sm:text-4xl font-extrabold uppercase text-white tracking-tight mt-4 leading-tight">
+          SCALING <span class="emerald-gradient">SUPPLY CHAINS</span> & FRESH PRODUCE.
         </h1>
       </div>
       <p class="text-slate-300 text-sm sm:text-base leading-relaxed mt-4">
-        9+ years driving APMC price optimization, direct collection models, and dark-store fulfillment across Bangalore, Chennai, Hyderabad, and Mumbai.
+        9+ years driving APMC price optimization, direct collection center models, and dark-store fulfillment across Bangalore, Chennai, Hyderabad, and Mumbai.
       </p>
       <div class="flex flex-wrap gap-3 mt-6 font-mono text-xs uppercase tracking-wider">
-        <a href="#experience" class="px-5 py-2.5 rounded-xl bg-orange-600 text-white font-bold hover:bg-orange-500 transition-all shadow-lg shadow-orange-600/20">Explore Roles</a>
-        <a href="#contact" class="px-5 py-2.5 rounded-xl border border-white/20 text-slate-200 hover:border-orange-500 transition-all">Get in Touch</a>
+        <a href="#experience" class="px-5 py-2.5 rounded-xl bg-teal-400 text-slate-950 font-bold hover:bg-teal-300 transition-all shadow-lg shadow-teal-500/20">Explore Roles</a>
+        <a href="#contact" class="px-5 py-2.5 rounded-xl border border-white/20 text-slate-200 hover:border-teal-500 transition-all">Get in Touch</a>
       </div>
     </div>
 
     <!-- 3. Cinematic Profile Photo Card -->
-    <div class="row-span-2 bento-card p-2 flex items-center justify-center group overflow-hidden">
-      <!-- Uses your uploaded photo file -->
-      <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover rounded-2xl filter contrast-110 group-hover:scale-105 transition-transform duration-500" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
+    <div class="row-span-2 bento-box p-2 flex items-center justify-center group overflow-hidden">
+      <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover rounded-2xl filter contrast-105 group-hover:scale-105 transition-transform duration-500" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
     </div>
 
     <!-- 4. Let's Connect CTA Card -->
-    <a href="#contact" class="bento-card p-6 flex flex-col justify-center items-center text-center group">
-      <div class="text-4xl text-orange-500 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+    <a href="#contact" class="bento-box p-6 flex flex-col justify-center items-center text-center group">
+      <div class="text-4xl text-teal-400 group-hover:scale-110 group-hover:rotate-6 transition-transform">
         <i class="fa-solid fa-paper-plane"></i>
       </div>
       <h3 class="font-bold text-white text-lg mt-3">Let's Connect & Collaborate</h3>
       <p class="text-xs text-slate-400 mt-1">Ready for high-impact supply chain discussions.</p>
     </a>
 
-    <!-- 5. Social Media Handles Card -->
-    <div class="md:col-span-2 bento-card p-6 space-y-4">
-      <h4 class="text-xs font-mono text-orange-400 uppercase tracking-widest">Verified Social Channels</h4>
+    <!-- 5. Verified Social Channels Card -->
+    <div class="md:col-span-2 bento-box p-6 space-y-4">
+      <h4 class="text-xs font-mono text-teal-400 uppercase tracking-widest">Verified Social Channels</h4>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <a href="https://instagram.com/Itsmeraghavendra.g" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500 transition-all flex items-center gap-3 text-sm text-slate-200">
-          <i class="fa-brands fa-instagram text-orange-400 text-lg"></i>
+        <a href="https://instagram.com/Itsmeraghavendra.g" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 transition-all flex items-center gap-3 text-sm text-slate-200">
+          <i class="fa-brands fa-instagram text-teal-400 text-lg"></i>
           <div>
             <div class="text-[10px] font-mono text-slate-400">Instagram</div>
             <div class="font-medium text-xs truncate">Itsmeraghavendra.g</div>
           </div>
         </a>
-        <a href="https://twitter.com/Raghavendragps" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500 transition-all flex items-center gap-3 text-sm text-slate-200">
-          <i class="fa-brands fa-x-twitter text-orange-400 text-lg"></i>
+        <a href="https://twitter.com/Raghavendragps" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 transition-all flex items-center gap-3 text-sm text-slate-200">
+          <i class="fa-brands fa-x-twitter text-teal-400 text-lg"></i>
           <div>
             <div class="text-[10px] font-mono text-slate-400">X (Twitter)</div>
             <div class="font-medium text-xs truncate">@Raghavendragps</div>
           </div>
         </a>
-        <a href="https://www.linkedin.com/in/raghavendra-g-164561166" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500 transition-all flex items-center gap-3 text-sm text-slate-200">
-          <i class="fa-brands fa-linkedin text-orange-400 text-lg"></i>
+        <a href="https://www.linkedin.com/in/raghavendra-g-164561166" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 transition-all flex items-center gap-3 text-sm text-slate-200">
+          <i class="fa-brands fa-linkedin text-teal-400 text-lg"></i>
           <div>
             <div class="text-[10px] font-mono text-slate-400">LinkedIn</div>
             <div class="font-medium text-xs truncate">raghavendra-g</div>
@@ -159,18 +163,18 @@
       </div>
     </div>
 
-    <!-- 6. Detailed Experience Portfolio Card -->
-    <div id="experience" class="md:col-span-2 lg:col-span-2 row-span-2 bento-card p-8 space-y-8 overflow-y-auto max-h-[600px]">
+    <!-- 6. Detailed Career Track Card -->
+    <div id="experience" class="md:col-span-2 lg:col-span-2 row-span-2 bento-box p-8 space-y-8 overflow-y-auto max-h-[600px]">
       <div class="border-b border-white/10 pb-4">
-        <span class="text-xs font-mono text-orange-400 uppercase tracking-widest">Career Track</span>
-        <h3 class="text-2xl font-display font-bold text-white mt-1">Professional Experience</h3>
+        <span class="text-xs font-mono text-teal-400 uppercase tracking-widest">Career Track</span>
+        <h3 class="text-2xl font-bold text-white mt-1">Professional Experience</h3>
       </div>
 
       <!-- Kamadhenu -->
       <div class="space-y-2">
         <div class="flex justify-between items-baseline">
           <h4 class="text-lg font-bold text-white">Sourcing Lead</h4>
-          <span class="text-xs font-mono text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg">08/2025 - Present</span>
+          <span class="text-xs font-mono text-teal-400 bg-teal-500/10 px-2.5 py-1 rounded-lg">08/2025 - Present</span>
         </div>
         <p class="text-xs font-mono text-slate-400">Kamadhenu Fresh Farms</p>
         <p class="text-sm text-slate-300 leading-relaxed">Directing end-to-end sourcing strategy for Watermelon Kiran and Taiwan Guava, managing own-farm production and Q-commerce dark-store fulfillment.</p>
@@ -198,8 +202,8 @@
     </div>
 
     <!-- 7. Core Competencies Card -->
-    <div class="bento-card p-6 space-y-4">
-      <h4 class="text-xs font-mono text-orange-400 uppercase tracking-widest">Core Competencies</h4>
+    <div class="bento-box p-6 space-y-4">
+      <h4 class="text-xs font-mono text-teal-400 uppercase tracking-widest">Core Competencies</h4>
       <div class="flex flex-wrap gap-2 font-mono text-[11px] uppercase">
         <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">Sourcing Strategy</span>
         <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">Vendor Management</span>
@@ -211,17 +215,17 @@
     </div>
 
     <!-- 8. Direct Contact & Collaboration Card -->
-    <div id="contact" class="md:col-span-2 bento-card p-8 space-y-6 border border-orange-500/30">
+    <div id="contact" class="md:col-span-2 bento-box p-8 space-y-6 border border-teal-500/30">
       <div>
-        <span class="text-xs font-mono text-orange-400 uppercase tracking-widest">Get in Touch</span>
-        <h3 class="text-2xl font-display font-bold text-white mt-1">Let's Connect & Collaborate</h3>
+        <span class="text-xs font-mono text-teal-400 uppercase tracking-widest">Get in Touch</span>
+        <h3 class="text-2xl font-bold text-white mt-1">Let's Connect & Collaborate</h3>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
-        <a href="tel:+919206692624" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500 transition-all flex items-center gap-3 text-slate-200">
-          <i class="fa-solid fa-phone text-orange-400"></i> +91 92066 92624
+        <a href="tel:+919206692624" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 transition-all flex items-center gap-3 text-slate-200">
+          <i class="fa-solid fa-phone text-teal-400"></i> +91 92066 92624
         </a>
-        <a href="mailto:contact@raghavendra.g0429@gmail.com" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500 transition-all flex items-center gap-3 text-slate-200 truncate">
-          <i class="fa-solid fa-envelope text-orange-400"></i> contact@raghavendra.g0429@gmail.com
+        <a href="mailto:contactraghavendra.g0429@gmail.com" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 transition-all flex items-center gap-3 text-slate-200 truncate">
+          <i class="fa-solid fa-envelope text-teal-400"></i> contactraghavendra.g0429@gmail.com
         </a>
       </div>
     </div>
@@ -239,8 +243,8 @@
   </footer>
 
   <script>
-    // Mouse hover lighting effect for Bento cards
-    const cards = document.querySelectorAll('.bento-card');
+    // Smooth dynamic mouse tracking glow for every Bento card
+    const cards = document.querySelectorAll('.bento-box');
     cards.forEach(card => {
       card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
