@@ -48,7 +48,27 @@
     }
     #preloader.fade-out { opacity: 0; visibility: hidden; }
 
-    /* Editorial Bento Card Styling Matching Pinterest Layout */
+    /* Moving Marquee Animation for Name Banner */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-container {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
     .editorial-card {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -124,19 +144,23 @@
   <!-- MAIN EDITORIAL CONTAINER -->
   <main class="max-w-7xl mx-auto px-6 py-10 space-y-10 relative z-10">
     
-    <!-- BIG BANNER & HERO SECTION -->
+    <!-- MOVING ANIMATED NAME BANNER -->
     <section class="space-y-6">
-      <!-- Giant PORTFOLIO Title Banner matching Pinterest layout -->
-      <div class="text-center overflow-hidden py-2">
-        <h1 class="text-[12vw] sm:text-[11vw] font-display font-black tracking-tighter uppercase text-[#f3f0ec] leading-none opacity-90 select-none">
-          PORTFOLIO
-        </h1>
+      <div class="marquee-container py-2">
+        <div class="marquee-track">
+          <span class="text-[10vw] sm:text-[9vw] font-display font-black tracking-tighter uppercase text-[#f3f0ec] leading-none opacity-85">
+            RAGHAVENDRA G — SOURCING & OPERATIONS LEAD —
+          </span>
+          <span class="text-[10vw] sm:text-[9vw] font-display font-black tracking-tighter uppercase text-[#f3f0ec] leading-none opacity-85">
+            RAGHAVENDRA G — SOURCING & OPERATIONS LEAD —
+          </span>
+        </div>
       </div>
 
-      <!-- Top Profile Row: UI/UX & Web (Left) + Portrait & Name (Right) -->
+      <!-- Top Profile Row: Left (Quote/Domain) + Right (Full Uncropped Photo Box) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        <!-- Left Box: Domain & Quote matching layout -->
+        <!-- Left Box -->
         <div class="lg:col-span-7 editorial-card p-8 sm:p-10 flex flex-col justify-between space-y-8">
           <div class="space-y-4">
             <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest font-bold">
@@ -158,10 +182,11 @@
           </div>
         </div>
 
-        <!-- Right Box: Portrait Photo & Executive Title -->
+        <!-- Right Box: Full Uncropped Photo Frame -->
         <div class="lg:col-span-5 editorial-card p-6 flex flex-col justify-between">
-          <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden relative border border-[#c58a5d]/20 bg-[#12100e]">
-            <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover filter contrast-110" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
+          <!-- Using object-contain and padding so hair and full head fit completely without cropping -->
+          <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden relative border border-[#c58a5d]/20 bg-[#12100e] flex items-center justify-center p-2">
+            <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-contain filter contrast-105" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
           </div>
           <div class="pt-4 space-y-1 text-center">
             <h2 class="text-2xl sm:text-3xl font-display font-bold uppercase text-[#f3f0ec] tracking-wide">Raghavendra G</h2>
@@ -170,7 +195,7 @@
               I'm an operations leader crafting clean, resilient agricultural and FMCG supply chain networks that scale efficiently.
             </p>
             
-            <!-- Key Stats Row matching Pinterest layout -->
+            <!-- Key Stats Row -->
             <div class="grid grid-cols-3 gap-2 pt-4 border-t border-[#c58a5d]/15 font-mono">
               <div class="text-center">
                 <div class="text-lg font-bold text-[#f3f0ec]">9+</div>
@@ -373,7 +398,7 @@
 
     </div>
 
-    <!-- LET'S COLLABORATE & SCAN TO CONNECT (MATCHING PINTEREST FOOTER) -->
+    <!-- LET'S COLLABORATE & SCAN TO CONNECT -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
       
       <div class="lg:col-span-7 editorial-card p-8 space-y-6">
