@@ -117,7 +117,7 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pink-500 to-cyan-400 flex items-center justify-center text-white font-bold font-mono text-2xl shadow-2xl shadow-pink-500/30 animate-bounce mb-4">RG</div>
-    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Profile Studio...</div>
+    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Studio...</div>
   </div>
 
   <div class="neon-blob top-10 left-10"></div>
@@ -145,7 +145,7 @@
 
   <main class="max-w-7xl mx-auto px-6 pt-32 pb-24 space-y-24 relative z-10">
     
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION WITH ORIGINAL FULL-HEIGHT PHOTO CARD -->
     <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh] animate-scroll">
       <div class="lg:col-span-8 dribbble-card p-8 sm:p-12 space-y-8 flex flex-col justify-between">
         <div class="space-y-6">
@@ -180,27 +180,16 @@
         </div>
       </div>
 
-      <!-- FULL PHOTO CARD WITH QUICK METRICS FILLING THE GAP -->
-      <div class="lg:col-span-4 dribbble-card p-6 flex flex-col justify-between group h-full min-h-[500px]">
-        <div class="w-full h-64 rounded-2xl overflow-hidden relative bg-slate-950/60 border border-indigo-500/20 flex items-center justify-center p-2">
-          <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-contain filter contrast-105 group-hover:scale-105 transition-transform duration-700" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
-        </div>
-
-        <!-- Quick Metrics Gap Filler -->
-        <div class="grid grid-cols-2 gap-3 my-3">
-          <div class="p-3 rounded-xl bg-white/5 border border-indigo-500/20 text-center">
-            <div class="font-mono text-xs text-slate-400">Experience</div>
-            <div class="font-display font-bold text-white text-sm">9+ Years</div>
+      <!-- ORIGINAL FULL SCREEN PHOTO CARD -->
+      <div class="lg:col-span-4 dribbble-card p-3 flex flex-col items-center justify-center group h-full min-h-[500px]">
+        <div class="w-full h-full rounded-2xl overflow-hidden relative">
+          <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover rounded-2xl filter contrast-110 group-hover:scale-105 transition-transform duration-700" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#090b14] via-transparent to-transparent opacity-60"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-center">
+            <span class="px-4 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/40 text-indigo-300 font-mono text-xs uppercase tracking-wider backdrop-blur-md">
+              Raghavendra G • Sourcing Lead
+            </span>
           </div>
-          <div class="p-3 rounded-xl bg-white/5 border border-indigo-500/20 text-center">
-            <div class="font-mono text-xs text-slate-400">Fulfillment</div>
-            <div class="font-display font-bold text-pink-400 text-sm">99% SLA</div>
-          </div>
-        </div>
-
-        <div class="w-full pt-3 border-t border-indigo-500/20 text-center space-y-0.5">
-          <div class="font-display font-bold text-white text-base tracking-wide">Raghavendra G</div>
-          <div class="font-mono text-xs text-pink-400 uppercase tracking-widest">Sourcing & Operations Lead</div>
         </div>
       </div>
     </section>
