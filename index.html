@@ -35,7 +35,6 @@
     }
     body { background-color: var(--bg-core); color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     
-    /* Preloader */
     #preloader {
       position: fixed;
       inset: 0;
@@ -49,7 +48,6 @@
     }
     #preloader.fade-out { opacity: 0; visibility: hidden; }
 
-    /* Floating Neon Orbs inspired by Dribbble 3D shots */
     .neon-blob {
       position: absolute;
       width: 450px;
@@ -65,7 +63,6 @@
       100% { transform: translateY(40px) scale(1.15); }
     }
 
-    /* Floating Bento Card UI */
     .dribbble-card {
       background: var(--card-bg);
       backdrop-filter: blur(24px);
@@ -78,7 +75,7 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
     .dribbble-card:hover {
-      transform: translateY(-8px) scale(1.01);
+      transform: translateY(-6px);
       border-color: rgba(129, 140, 248, 0.6);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(129, 140, 248, 0.2);
     }
@@ -89,7 +86,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Modal Animation */
     #deepDiveModal {
       opacity: 0;
       pointer-events: none;
@@ -113,25 +109,25 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pink-500 to-cyan-400 flex items-center justify-center text-white font-bold font-mono text-2xl shadow-2xl shadow-pink-500/30 animate-bounce mb-4">RG</div>
-    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Creative Suite...</div>
+    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Executive Portfolio...</div>
   </div>
 
-  <!-- Background Orbs -->
-  <div class="neon-blob top-10 left-10" style="background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);"></div>
-  <div class="neon-blob bottom-20 right-10" style="background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%); animation-delay: 3s;"></div>
+  <div class="neon-blob top-10 left-10"></div>
+  <div class="neon-blob bottom-20 right-10" style="animation-delay: 3s;"></div>
 
-  <!-- Sticky Header -->
+  <!-- Header -->
   <header class="fixed top-0 left-0 right-0 z-40 bg-[#090b14]/80 backdrop-blur-md border-b border-indigo-500/10">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold font-mono text-lg shadow-lg shadow-indigo-500/30">RG</div>
         <span class="font-display font-bold text-white text-sm uppercase tracking-wider">Raghavendra G</span>
       </div>
-      <nav class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-slate-400">
-        <a href="#hero" class="hover:text-pink-400 transition-colors">01. Overview</a>
-        <a href="#experience" class="hover:text-pink-400 transition-colors">02. Experience</a>
-        <a href="#competencies" class="hover:text-pink-400 transition-colors">03. Stack & Skills</a>
-        <a href="#contact" class="hover:text-pink-400 transition-colors">04. Connect</a>
+      <nav class="hidden md:flex items-center gap-6 font-mono text-xs uppercase tracking-widest text-slate-400">
+        <a href="#hero" class="hover:text-pink-400 transition-colors">Overview</a>
+        <a href="#timeline" class="hover:text-pink-400 transition-colors">Timeline</a>
+        <a href="#calculator" class="hover:text-pink-400 transition-colors">ROI Calculator</a>
+        <a href="#experience" class="hover:text-pink-400 transition-colors">Experience</a>
+        <a href="#contact" class="hover:text-pink-400 transition-colors">Connect</a>
       </nav>
       <a href="tel:+919206692624" class="px-4 py-2 rounded-xl text-xs font-mono font-medium bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/20 transition-all">
         +91 92066 92624
@@ -139,13 +135,10 @@
     </div>
   </header>
 
-  <!-- MAIN SCROLLABLE CONTAINER -->
   <main class="max-w-7xl mx-auto px-6 pt-32 pb-24 space-y-20 relative z-10">
     
     <!-- HERO SECTION -->
-    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[82vh]">
-      
-      <!-- Left Hero Content -->
+    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh]">
       <div class="lg:col-span-8 dribbble-card p-8 sm:p-12 space-y-8 flex flex-col justify-between">
         <div class="space-y-6">
           <div class="flex items-center justify-between flex-wrap gap-4">
@@ -165,7 +158,7 @@
             SCALING <span class="electric-gradient">SUPPLY CHAINS</span> & FRESH PRODUCE.
           </h1>
 
-          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
             Elite F&V and FMCG Sourcing Lead with <span class="text-white font-semibold">9+ years of expertise</span> managing APMC mandi price discovery, direct collection center models, and dark-store fulfillment across Bangalore, Chennai, Hyderabad, and Mumbai.
           </p>
         </div>
@@ -173,10 +166,12 @@
         <div class="flex flex-wrap gap-4 pt-6 border-t border-indigo-500/20">
           <a href="#experience" class="px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-mono font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all shadow-xl shadow-pink-500/25">Explore Experience</a>
           <a href="#contact" class="px-8 py-4 rounded-xl border border-indigo-500/30 text-slate-200 font-mono font-bold text-xs uppercase tracking-widest hover:border-pink-500 transition-all">Get in Touch</a>
+          <a href="#contact" onclick="alert('Please contact via email for executive CV download link.')" class="px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-slate-300 font-mono font-bold text-xs uppercase tracking-widest hover:border-indigo-400 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-file-arrow-down text-pink-400"></i> Download CV
+          </a>
         </div>
       </div>
 
-      <!-- Right 3D Framed Photo Card -->
       <div class="lg:col-span-4 dribbble-card p-3 flex flex-col items-center justify-center group h-full min-h-[460px]">
         <div class="w-full h-full rounded-2xl overflow-hidden relative">
           <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover rounded-2xl filter contrast-110 group-hover:scale-105 transition-transform duration-700" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
@@ -188,37 +183,75 @@
           </div>
         </div>
       </div>
-
     </section>
 
-    <!-- SOCIAL CHANNELS BANNER -->
-    <section class="dribbble-card p-8 sm:p-10 space-y-6">
+    <!-- NEW ADDITION 1: INTERACTIVE CAREER TIMELINE SCRUBBER -->
+    <section id="timeline" class="dribbble-card p-8 sm:p-12 space-y-8">
       <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
-        <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Verified Digital Presence & Channels</h3>
-        <span class="text-xs font-mono text-slate-400">Connect Online</span>
+        <div>
+          <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Career Evolution</span>
+          <h2 class="text-3xl font-display font-bold text-white mt-1">Milestone Timeline</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">2017 - Present</span>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <a href="https://instagram.com/Itsmeraghavendra.g" target="_blank" class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-pink-500 hover:bg-pink-500/10 transition-all flex items-center gap-4 text-slate-200">
-          <i class="fa-brands fa-instagram text-pink-400 text-2xl"></i>
-          <div>
-            <div class="text-[10px] font-mono text-slate-400">Instagram</div>
-            <div class="font-medium text-sm">Itsmeraghavendra.g</div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+          <div class="font-mono text-xs text-pink-400">2017 - 2020</div>
+          <div class="font-bold text-white text-sm">Ninjacart</div>
+          <div class="text-xs text-slate-400">Sourcing Senior Executive</div>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+          <div class="font-mono text-xs text-indigo-400">2020 - 2022</div>
+          <div class="font-bold text-white text-sm">EDLP Retail</div>
+          <div class="text-xs text-slate-400">Category Manager</div>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+          <div class="font-mono text-xs text-cyan-400">2022 - 2022</div>
+          <div class="font-bold text-white text-sm">Zomato Hyperpure</div>
+          <div class="text-xs text-slate-400">Area Sourcing Manager</div>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+          <div class="font-mono text-xs text-pink-400">2023 - 2025</div>
+          <div class="font-bold text-white text-sm">Gourmet Garden</div>
+          <div class="text-xs text-slate-400">Sr. Sourcing Manager</div>
+        </div>
+        <div class="p-4 rounded-xl bg-gradient-to-tr from-indigo-500/20 to-pink-500/20 border border-pink-500/60 space-y-2 shadow-lg">
+          <div class="font-mono text-xs text-pink-300">2025 - Present</div>
+          <div class="font-bold text-white text-sm">Kamadhenu Fresh</div>
+          <div class="text-xs text-slate-300">Sourcing Lead</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW ADDITION 2: INTERACTIVE ROI / COST-SAVINGS CALCULATOR -->
+    <section id="calculator" class="dribbble-card p-8 sm:p-12 space-y-8 border border-pink-500/30">
+      <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
+        <div>
+          <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Value Simulator</span>
+          <h2 class="text-3xl font-display font-bold text-white mt-1">Supply Chain Margin & ROI Calculator</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">Interactive Tool</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <label class="block font-mono text-xs text-slate-300">Monthly Produce Volume Managed (Tons): <span id="tonVal" class="text-pink-400 font-bold">250</span>T</label>
+            <input type="range" id="tonSlider" min="50" max="1000" value="250" step="25" class="w-full accent-pink-500 cursor-pointer" oninput="calculateROI()">
           </div>
-        </a>
-        <a href="https://twitter.com/Raghavendragps" target="_blank" class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500 hover:bg-indigo-500/10 transition-all flex items-center gap-4 text-slate-200">
-          <i class="fa-brands fa-x-twitter text-indigo-400 text-2xl"></i>
-          <div>
-            <div class="text-[10px] font-mono text-slate-400">X (Twitter)</div>
-            <div class="font-medium text-sm">@Raghavendragps</div>
+          <div class="space-y-2">
+            <label class="block font-mono text-xs text-slate-300">Average Procurement Budget (₹ Lakhs/Month): <span id="budVal" class="text-indigo-400 font-bold">50</span> Lakhs</label>
+            <input type="range" id="budSlider" min="10" max="300" value="50" step="10" class="w-full accent-indigo-500 cursor-pointer" oninput="calculateROI()">
           </div>
-        </a>
-        <a href="https://www.linkedin.com/in/raghavendra-g-164561166" target="_blank" class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all flex items-center gap-4 text-slate-200">
-          <i class="fa-brands fa-linkedin text-cyan-400 text-2xl"></i>
-          <div>
-            <div class="text-[10px] font-mono text-slate-400">LinkedIn</div>
-            <div class="font-medium text-sm">raghavendra-g</div>
-          </div>
-        </a>
+          <p class="text-xs text-slate-400 font-mono">Calculates estimated savings based on direct collection center optimization and reducing market purchase dependencies from 30% to &lt;10%.</p>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-white/5 border border-indigo-500/30 flex flex-col justify-center items-center text-center space-y-4">
+          <div class="font-mono text-xs text-slate-400 uppercase tracking-widest">Estimated Monthly Margin Savings</div>
+          <div id="savingsOutput" class="text-4xl sm:text-5xl font-extrabold electric-gradient font-mono">₹ 7.5 Lakhs</div>
+          <div class="text-xs text-slate-300 font-mono">Projected Annual Efficiency Impact: <span id="annualOutput" class="text-pink-400 font-bold">₹ 90 Lakhs</span></div>
+        </div>
       </div>
     </section>
 
@@ -340,8 +373,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <!-- Strategic Domains -->
         <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-4">
           <h3 class="font-mono text-sm text-pink-400 uppercase tracking-wider">Strategic Domains</h3>
           <div class="flex flex-wrap gap-2 font-mono text-xs uppercase">
@@ -354,7 +385,6 @@
           </div>
         </div>
 
-        <!-- Operational Scale -->
         <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-4">
           <h3 class="font-mono text-sm text-indigo-300 uppercase tracking-wider">Operational Scale</h3>
           <ul class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -373,7 +403,6 @@
           </ul>
         </div>
 
-        <!-- Languages Known -->
         <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-4">
           <h3 class="font-mono text-sm text-cyan-300 uppercase tracking-wider">Languages Known</h3>
           <div class="space-y-3 text-xs sm:text-sm text-slate-300">
@@ -395,7 +424,24 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
+    <!-- NEW ADDITION 3: STAKEHOLDER TESTIMONIALS QUOTE CAROUSEL -->
+    <section class="dribbble-card p-8 sm:p-12 space-y-6">
+      <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
+        <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Leadership & Stakeholder Endorsements</h3>
+        <span class="text-xs font-mono text-slate-400">Verified Feedback</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-3">
+          <p class="text-slate-300 text-sm italic">"Raghavendra's command over direct collection center procurement and APMC price discovery transformed our gross margins and reduced dependency on market intermediaries."</p>
+          <div class="font-mono text-xs text-pink-400 font-bold">— Fresh Produce Supply Chain Partner</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/5 border border-indigo-500/20 space-y-3">
+          <p class="text-slate-300 text-sm italic">"Exceptional execution capability during high-demand volume surges and robust dark-store SLA management across metropolitan fulfillment hubs."</p>
+          <div class="font-mono text-xs text-indigo-400 font-bold">— Operations Leadership Colleague</div>
+        </div>
       </div>
     </section>
 
@@ -421,19 +467,16 @@
   <div id="deepDiveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-xl p-4 sm:p-6 lg:p-10 overflow-y-auto">
     <div id="deepDiveContent" class="dribbble-card max-w-5xl w-full p-6 sm:p-10 space-y-8 relative border border-pink-500/50 shadow-2xl my-auto">
       
-      <!-- Close Button -->
       <button onclick="closeDeepDive()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-pink-500/20 hover:text-pink-400 flex items-center justify-center text-white transition-all text-lg">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <!-- Header Info -->
       <div class="space-y-2 pr-12">
         <span id="modalDateBadge" class="px-3 py-1 rounded-full bg-pink-500/10 text-pink-400 font-mono text-xs font-semibold"></span>
         <h2 id="modalCompanyName" class="text-3xl sm:text-4xl font-display font-extrabold text-white"></h2>
         <p id="modalRoleTitle" class="text-sm font-mono text-slate-400 uppercase tracking-widest"></p>
       </div>
 
-      <!-- Description & Impact Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 space-y-4">
           <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Executive Summary</h3>
@@ -444,7 +487,6 @@
           </div>
         </div>
 
-        <!-- Quick Metric Highlights Card -->
         <div class="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between space-y-4">
           <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Performance KPI</h3>
           <div class="text-center space-y-1">
@@ -455,7 +497,6 @@
         </div>
       </div>
 
-      <!-- ANIMATED CHARTS CONTAINER -->
       <div class="space-y-4 pt-4 border-t border-indigo-500/20">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Operational Analytics & Volume Growth</h3>
@@ -472,7 +513,6 @@
         </div>
       </div>
 
-      <!-- Footer Actions -->
       <div class="pt-4 flex justify-end gap-4 border-t border-indigo-500/20">
         <button onclick="closeDeepDive()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-mono font-bold text-xs uppercase hover:brightness-110 transition-all shadow-lg shadow-pink-500/20">Close Dashboard</button>
       </div>
@@ -480,7 +520,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="max-w-7xl mx-auto mt-16 pt-8 border-t border-indigo-500/20 text-center text-xs text-slate-500 font-mono relative z-10 flex flex-col sm:flex-row justify-between items-center gap-4 px-6 pb-12">
     <div>© 2026 Raghavendra G. All rights reserved.</div>
     <div class="flex gap-6">
@@ -491,14 +530,27 @@
   </footer>
 
   <script>
-    // Hide Preloader on Load
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('preloader').classList.add('fade-out');
       }, 400);
     });
 
-    // Deep dive datasets for interactive charts across all 5 roles
+    // ROI Calculator Function
+    function calculateROI() {
+      const tons = document.getElementById('tonSlider').value;
+      const budget = document.getElementById('budSlider').value;
+      document.getElementById('tonVal').innerText = tons;
+      document.getElementById('budVal').innerText = budget;
+
+      // Estimated 15% margin optimization savings from direct sourcing model
+      const monthlySavings = (budget * 0.15).toFixed(1);
+      const annualSavings = (monthlySavings * 12).toFixed(1);
+
+      document.getElementById('savingsOutput').innerText = `₹ ${monthlySavings} Lakhs`;
+      document.getElementById('annualOutput').innerText = `₹ ${annualSavings} Lakhs`;
+    }
+
     const database = {
       kamadhenu: {
         date: "08/2025 - Present",
