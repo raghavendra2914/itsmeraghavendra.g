@@ -74,15 +74,27 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-color);
       border-radius: 24px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.2s ease-out, border-color 0.4s ease, box-shadow 0.4s ease;
       position: relative;
       overflow: hidden;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     .editorial-card:hover {
-      transform: translateY(-5px);
       border-color: rgba(197, 138, 93, 0.6);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(197, 138, 93, 0.15);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(197, 138, 93, 0.2);
+    }
+
+    /* SCROLL REVEAL ANIMATIONS */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .accent-gradient {
@@ -129,7 +141,7 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#c58a5d] to-[#e0a96d] flex items-center justify-center text-[#12100e] font-bold font-mono text-2xl shadow-2xl shadow-[#c58a5d]/30 animate-bounce mb-4">RG</div>
-    <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest animate-pulse">Loading Editorial Portfolio...</div>
+    <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest animate-pulse">Loading Motion Suite...</div>
   </div>
 
   <div id="toast"><i class="fa-solid fa-circle-check mr-2"></i>Copied to clipboard successfully!</div>
@@ -141,10 +153,10 @@
   </header>
 
   <!-- MAIN EDITORIAL CONTAINER -->
-  <main class="max-w-7xl mx-auto px-6 py-10 space-y-10 relative z-10">
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-12 relative z-10">
     
     <!-- MOVING ANIMATED NAME BANNER -->
-    <section class="space-y-6">
+    <section class="space-y-6 reveal-on-scroll">
       <div class="marquee-container py-2">
         <div class="marquee-track">
           <span class="text-[10vw] sm:text-[9vw] font-display font-black tracking-tighter uppercase text-[#f3f0ec] leading-none opacity-85">
@@ -160,7 +172,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         <!-- Left Box -->
-        <div class="lg:col-span-7 editorial-card p-8 sm:p-10 flex flex-col justify-between space-y-8">
+        <div class="lg:col-span-7 editorial-card p-8 sm:p-10 flex flex-col justify-between space-y-8 tilt-card">
           <div class="space-y-4">
             <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest font-bold">
               Sourcing / Supply Chain / Operations
@@ -182,7 +194,7 @@
         </div>
 
         <!-- Right Box: Full Uncropped Photo Frame -->
-        <div class="lg:col-span-5 editorial-card p-6 flex flex-col justify-between">
+        <div class="lg:col-span-5 editorial-card p-6 flex flex-col justify-between tilt-card">
           <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden relative border border-[#c58a5d]/20 bg-[#12100e] flex items-center justify-center p-2">
             <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-contain filter contrast-105" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
           </div>
@@ -215,11 +227,11 @@
     </section>
 
     <!-- WHAT I DO / CORE COMPETENCIES -->
-    <section class="space-y-4">
+    <section class="space-y-4 reveal-on-scroll">
       <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">What I Do</div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         
-        <div class="editorial-card p-6 space-y-3">
+        <div class="editorial-card p-6 space-y-3 tilt-card">
           <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
             <i class="fa-solid fa-seedling text-sm"></i>
           </div>
@@ -227,7 +239,7 @@
           <p class="text-xs text-[#a39e93] leading-relaxed">Direct APMC mandi price discovery and farmer collection center setups.</p>
         </div>
 
-        <div class="editorial-card p-6 space-y-3">
+        <div class="editorial-card p-6 space-y-3 tilt-card">
           <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
             <i class="fa-solid fa-truck-fast text-sm"></i>
           </div>
@@ -235,7 +247,7 @@
           <p class="text-xs text-[#a39e93] leading-relaxed">End-to-end logistics and dark-store fulfillment management.</p>
         </div>
 
-        <div class="editorial-card p-6 space-y-3">
+        <div class="editorial-card p-6 space-y-3 tilt-card">
           <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
             <i class="fa-solid fa-handshake text-sm"></i>
           </div>
@@ -243,7 +255,7 @@
           <p class="text-xs text-[#a39e93] leading-relaxed">Building trusted distributor and agricultural partner relationships.</p>
         </div>
 
-        <div class="editorial-card p-6 space-y-3">
+        <div class="editorial-card p-6 space-y-3 tilt-card">
           <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
             <i class="fa-solid fa-boxes-stacked text-sm"></i>
           </div>
@@ -251,7 +263,7 @@
           <p class="text-xs text-[#a39e93] leading-relaxed">Minimizing wastage and maintaining optimal stock holding costs.</p>
         </div>
 
-        <div class="editorial-card p-6 space-y-3">
+        <div class="editorial-card p-6 space-y-3 tilt-card">
           <div class="w-8 h-8 rounded-lg bg-[#c58a5d]/10 border border-[#c58a5d]/30 flex items-center justify-center text-[#c58a5d]">
             <i class="fa-solid fa-chart-line text-sm"></i>
           </div>
@@ -263,10 +275,10 @@
     </section>
 
     <!-- MY PROCESS & FEATURED WORK -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start reveal-on-scroll">
       
       <!-- My Process -->
-      <div class="lg:col-span-5 editorial-card p-8 space-y-6">
+      <div class="lg:col-span-5 editorial-card p-8 space-y-6 tilt-card">
         <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">My Process</div>
         <div class="space-y-6 font-mono">
           <div class="flex items-start gap-4">
@@ -307,8 +319,8 @@
         </div>
       </div>
 
-      <!-- Featured Work & Experience (All 5 Roles including Ninjacart) -->
-      <div class="lg:col-span-7 editorial-card p-8 space-y-6">
+      <!-- Featured Work & Experience -->
+      <div class="lg:col-span-7 editorial-card p-8 space-y-6 tilt-card">
         <div class="flex items-center justify-between">
           <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Featured Work & Experience</div>
           <span class="font-mono text-xs text-[#a39e93]">Click role for Analytics →</span>
@@ -357,10 +369,10 @@
     </div>
 
     <!-- ABOUT ME & TOOLS I USE -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch reveal-on-scroll">
       
       <!-- About Me -->
-      <div class="lg:col-span-7 editorial-card p-8 space-y-6 flex flex-col justify-between">
+      <div class="lg:col-span-7 editorial-card p-8 space-y-6 flex flex-col justify-between tilt-card">
         <div class="space-y-4">
           <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">About Me</div>
           <h3 class="text-2xl font-display font-bold text-[#f3f0ec]">Driven by operational rigor & fresh produce excellence.</h3>
@@ -377,7 +389,7 @@
       </div>
 
       <!-- Tools & Stack -->
-      <div class="lg:col-span-5 editorial-card p-8 space-y-6 flex flex-col justify-between">
+      <div class="lg:col-span-5 editorial-card p-8 space-y-6 flex flex-col justify-between tilt-card">
         <div class="space-y-4">
           <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Tools & Stack</div>
           <div class="grid grid-cols-3 gap-3 font-mono text-xs">
@@ -404,9 +416,9 @@
     </div>
 
     <!-- LET'S COLLABORATE & WORKING SOCIAL LINKS -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch reveal-on-scroll">
       
-      <div class="lg:col-span-7 editorial-card p-8 space-y-6">
+      <div class="lg:col-span-7 editorial-card p-8 space-y-6 tilt-card">
         <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Let's Collaborate</div>
         <h3 class="text-2xl font-display font-bold text-[#f3f0ec]">Have a project in mind or want to discuss leadership?</h3>
         <p class="text-sm text-[#a39e93]">I'd love to hear from you. Reach out directly through any channel below.</p>
@@ -427,8 +439,8 @@
         </div>
       </div>
 
-      <!-- Working Social Links matching Pinterest layout -->
-      <div class="lg:col-span-5 editorial-card p-8 flex flex-col justify-between text-center space-y-6">
+      <!-- Working Social Links -->
+      <div class="lg:col-span-5 editorial-card p-8 flex flex-col justify-between text-center space-y-6 tilt-card">
         <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Connect Online</div>
         <div class="grid grid-cols-3 gap-3">
           <a href="https://www.linkedin.com/in/raghavendra-g-164561166" target="_blank" class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30 hover:border-[#c58a5d] hover:bg-[#c58a5d]/10 transition-all flex flex-col items-center text-[#f3f0ec]">
@@ -520,6 +532,37 @@
       setTimeout(() => {
         document.getElementById('preloader').classList.add('fade-out');
       }, 400);
+    });
+
+    // Scroll Reveal Observer
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(section => {
+      observer.observe(section);
+    });
+
+    // 3D Tilt Effect on Cards
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const xc = rect.width / 2;
+        const yc = rect.height / 2;
+        const dx = (x - xc) / 25;
+        const dy = (yc - y) / 25;
+        card.style.transform = `rotateY(${dx}deg) rotateX(${dy}deg) translateY(-5px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateY(0deg) rotateX(0deg) translateY(0px)';
+      });
     });
 
     function copyToClipboard(text) {
