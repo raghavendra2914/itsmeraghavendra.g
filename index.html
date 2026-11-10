@@ -86,6 +86,17 @@
       -webkit-text-fill-color: transparent;
     }
 
+    /* SCROLL REVEAL ANIMATION CLASSES */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     #deepDiveModal {
       opacity: 0;
       pointer-events: none;
@@ -109,7 +120,7 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pink-500 to-cyan-400 flex items-center justify-center text-white font-bold font-mono text-2xl shadow-2xl shadow-pink-500/30 animate-bounce mb-4">RG</div>
-    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Executive Portfolio...</div>
+    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Cinematic Portfolio...</div>
   </div>
 
   <div class="neon-blob top-10 left-10"></div>
@@ -138,7 +149,7 @@
   <main class="max-w-7xl mx-auto px-6 pt-32 pb-24 space-y-20 relative z-10">
     
     <!-- HERO SECTION -->
-    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh]">
+    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh] reveal-on-scroll">
       <div class="lg:col-span-8 dribbble-card p-8 sm:p-12 space-y-8 flex flex-col justify-between">
         <div class="space-y-6">
           <div class="flex items-center justify-between flex-wrap gap-4">
@@ -185,8 +196,8 @@
       </div>
     </section>
 
-    <!-- NEW ADDITION 1: INTERACTIVE CAREER TIMELINE SCRUBBER -->
-    <section id="timeline" class="dribbble-card p-8 sm:p-12 space-y-8">
+    <!-- TIMELINE SECTION -->
+    <section id="timeline" class="dribbble-card p-8 sm:p-12 space-y-8 reveal-on-scroll">
       <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
         <div>
           <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Career Evolution</span>
@@ -196,27 +207,27 @@
       </div>
       
       <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
           <div class="font-mono text-xs text-pink-400">2017 - 2020</div>
           <div class="font-bold text-white text-sm">Ninjacart</div>
           <div class="text-xs text-slate-400">Sourcing Senior Executive</div>
         </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
           <div class="font-mono text-xs text-indigo-400">2020 - 2022</div>
           <div class="font-bold text-white text-sm">EDLP Retail</div>
           <div class="text-xs text-slate-400">Category Manager</div>
         </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
           <div class="font-mono text-xs text-cyan-400">2022 - 2022</div>
           <div class="font-bold text-white text-sm">Zomato Hyperpure</div>
           <div class="text-xs text-slate-400">Area Sourcing Manager</div>
         </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
           <div class="font-mono text-xs text-pink-400">2023 - 2025</div>
           <div class="font-bold text-white text-sm">Gourmet Garden</div>
           <div class="text-xs text-slate-400">Sr. Sourcing Manager</div>
         </div>
-        <div class="p-4 rounded-xl bg-gradient-to-tr from-indigo-500/20 to-pink-500/20 border border-pink-500/60 space-y-2 shadow-lg">
+        <div class="p-4 rounded-xl bg-gradient-to-tr from-indigo-500/20 to-pink-500/20 border border-pink-500/60 space-y-2 shadow-lg hover:scale-105 transition-transform">
           <div class="font-mono text-xs text-pink-300">2025 - Present</div>
           <div class="font-bold text-white text-sm">Kamadhenu Fresh</div>
           <div class="text-xs text-slate-300">Sourcing Lead</div>
@@ -224,8 +235,8 @@
       </div>
     </section>
 
-    <!-- NEW ADDITION 2: INTERACTIVE ROI / COST-SAVINGS CALCULATOR -->
-    <section id="calculator" class="dribbble-card p-8 sm:p-12 space-y-8 border border-pink-500/30">
+    <!-- ROI CALCULATOR SECTION -->
+    <section id="calculator" class="dribbble-card p-8 sm:p-12 space-y-8 border border-pink-500/30 reveal-on-scroll">
       <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
         <div>
           <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Value Simulator</span>
@@ -256,7 +267,7 @@
     </section>
 
     <!-- EXPERIENCE SECTION -->
-    <section id="experience" class="space-y-8 pt-6">
+    <section id="experience" class="space-y-8 pt-6 reveal-on-scroll">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-indigo-500/20 pb-6">
         <div>
           <span class="text-xs font-mono text-indigo-400 uppercase tracking-widest">02. Career Trajectory</span>
@@ -365,8 +376,8 @@
       </div>
     </section>
 
-    <!-- CORE COMPETENCIES, SKILLS & LANGUAGES -->
-    <section id="competencies" class="dribbble-card p-8 sm:p-12 space-y-8">
+    <!-- CORE COMPETENCIES SECTION -->
+    <section id="competencies" class="dribbble-card p-8 sm:p-12 space-y-8 reveal-on-scroll">
       <div>
         <span class="text-xs font-mono text-indigo-400 uppercase tracking-widest">03. Expertise & Operations</span>
         <h2 class="text-3xl font-display font-bold text-white mt-1">Core Competencies, Skills & Languages</h2>
@@ -427,8 +438,8 @@
       </div>
     </section>
 
-    <!-- NEW ADDITION 3: STAKEHOLDER TESTIMONIALS QUOTE CAROUSEL -->
-    <section class="dribbble-card p-8 sm:p-12 space-y-6">
+    <!-- TESTIMONIALS SECTION -->
+    <section class="dribbble-card p-8 sm:p-12 space-y-6 reveal-on-scroll">
       <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
         <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Leadership & Stakeholder Endorsements</h3>
         <span class="text-xs font-mono text-slate-400">Verified Feedback</span>
@@ -446,7 +457,7 @@
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="dribbble-card p-10 sm:p-14 text-center space-y-8 border border-pink-500/30">
+    <section id="contact" class="dribbble-card p-10 sm:p-14 text-center space-y-8 border border-pink-500/30 reveal-on-scroll">
       <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">04. Connect & Collaborate</span>
       <h2 class="text-4xl font-display font-bold text-white">Let's Discuss Sourcing Leadership</h2>
       <p class="text-slate-300 text-base max-w-xl mx-auto">Ready to scale supply chains, optimize procurement margins, and drive operational excellence? Reach out directly.</p>
@@ -463,7 +474,7 @@
 
   </main>
 
-  <!-- IMMERSIVE FULL-SCREEN DEEP DIVE MODAL WITH CHARTS & ANIMATIONS -->
+  <!-- IMMERSIVE FULL-SCREEN DEEP DIVE MODAL -->
   <div id="deepDiveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-xl p-4 sm:p-6 lg:p-10 overflow-y-auto">
     <div id="deepDiveContent" class="dribbble-card max-w-5xl w-full p-6 sm:p-10 space-y-8 relative border border-pink-500/50 shadow-2xl my-auto">
       
@@ -536,14 +547,27 @@
       }, 400);
     });
 
-    // ROI Calculator Function
+    // Scroll Reveal Observer for silky smooth entry animations on scroll
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(section => {
+      observer.observe(section);
+    });
+
+    // ROI Calculator
     function calculateROI() {
       const tons = document.getElementById('tonSlider').value;
       const budget = document.getElementById('budSlider').value;
       document.getElementById('tonVal').innerText = tons;
       document.getElementById('budVal').innerText = budget;
 
-      // Estimated 15% margin optimization savings from direct sourcing model
       const monthlySavings = (budget * 0.15).toFixed(1);
       const annualSavings = (monthlySavings * 12).toFixed(1);
 
