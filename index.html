@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js for interactive animated charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     tailwind.config = {
@@ -28,21 +30,11 @@
   <style>
     :root {
       --bg-core: #03070f;
-      --card-bg: rgba(13, 20, 36, 0.75);
-      --border-color: rgba(20, 184, 166, 0.18);
+      --card-bg: rgba(13, 20, 36, 0.8);
+      --border-color: rgba(20, 184, 166, 0.2);
     }
     body { background-color: var(--bg-core); color: #f1f5f9; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     
-    /* Smooth Entrance Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-enter {
-      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    /* Bento Card Styling with Interactive Glow */
     .bento-box {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -64,7 +56,7 @@
     }
     .bento-box:hover::before { opacity: 1; }
     .bento-box:hover {
-      transform: translateY(-6px) scale(1.01);
+      transform: translateY(-6px);
       border-color: rgba(20, 184, 166, 0.5);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(20, 184, 166, 0.15);
     }
@@ -81,29 +73,24 @@
       background: radial-gradient(circle, rgba(13, 148, 136, 0.15) 0%, rgba(6, 182, 212, 0.04) 50%, transparent 70%);
       pointer-events: none;
       z-index: 0;
-      animation: pulseGlow 6s ease-in-out infinite alternate;
-    }
-    @keyframes pulseGlow {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(1.15); opacity: 1; }
     }
 
-    /* Modal Animation */
-    #detailModal {
+    /* Fullscreen Slide & Fade Animation for Deep Dive Modal */
+    #deepDiveModal {
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
+      transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
     }
-    #detailModal:not(.hidden) {
+    #deepDiveModal.active {
       opacity: 1;
       pointer-events: auto;
     }
-    #detailModal > div {
-      transform: scale(0.9) translateY(20px);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    #deepDiveContent {
+      transform: translateY(40px) scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    #detailModal:not(.hidden) > div {
-      transform: scale(1) translateY(0);
+    #deepDiveModal.active #deepDiveContent {
+      transform: translateY(0) scale(1);
     }
   </style>
 </head>
@@ -112,7 +99,7 @@
   <div class="ambient-light top-0 left-1/2 -translate-x-1/2"></div>
 
   <!-- Bento Dashboard Grid -->
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 relative z-10 animate-enter">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 relative z-10">
 
     <!-- 1. Header & Live Status Card -->
     <div class="bento-box p-6 flex flex-col justify-between">
@@ -149,8 +136,8 @@
         9+ years driving APMC price optimization, direct collection center models, and dark-store fulfillment across Bangalore, Chennai, Hyderabad, and Mumbai.
       </p>
       <div class="flex flex-wrap gap-3 mt-6 font-mono text-xs uppercase tracking-wider">
-        <a href="#experience" class="px-5 py-2.5 rounded-xl bg-teal-400 text-slate-950 font-bold hover:bg-teal-300 transition-all shadow-lg shadow-teal-500/20 hover:scale-105">Explore Roles</a>
-        <a href="#contact" class="px-5 py-2.5 rounded-xl border border-white/20 text-slate-200 hover:border-teal-500 transition-all hover:scale-105">Get in Touch</a>
+        <a href="#experience" class="px-5 py-2.5 rounded-xl bg-teal-400 text-slate-950 font-bold hover:bg-teal-300 transition-all shadow-lg shadow-teal-500/20">Explore Roles</a>
+        <a href="#contact" class="px-5 py-2.5 rounded-xl border border-white/20 text-slate-200 hover:border-teal-500 transition-all">Get in Touch</a>
       </div>
     </div>
 
@@ -196,41 +183,44 @@
       </div>
     </div>
 
-    <!-- 6. Detailed Career Track Card (Clickable items to open modal) -->
+    <!-- 6. Detailed Career Track Card (Click any to open immersive visualization suite) -->
     <div id="experience" class="md:col-span-2 lg:col-span-2 row-span-2 bento-box p-8 space-y-6 overflow-y-auto max-h-[600px]">
       <div class="border-b border-white/10 pb-4 flex justify-between items-center">
         <div>
           <span class="text-xs font-mono text-teal-400 uppercase tracking-widest">Career Track</span>
           <h3 class="text-2xl font-bold text-white mt-1">Professional Experience</h3>
         </div>
-        <span class="text-[11px] font-mono text-slate-400">Click card for details</span>
+        <span class="text-[11px] font-mono text-teal-300 bg-teal-500/10 px-2.5 py-1 rounded-full">Click for Interactive Visuals →</span>
       </div>
 
       <!-- Kamadhenu -->
-      <div onclick="openModal('kamadhenu')" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
+      <div onclick="openDeepDive('kamadhenu')" class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
         <div class="flex justify-between items-baseline">
           <h4 class="text-base font-bold text-white group-hover:text-teal-400 transition-colors">Sourcing Lead • Kamadhenu Fresh Farms</h4>
           <span class="text-xs font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded">08/2025</span>
         </div>
-        <p class="text-xs text-slate-300 line-clamp-2">Directing end-to-end sourcing strategy for Watermelon Kiran and Taiwan Guava, managing own-farm production and Q-commerce dark-store fulfillment.</p>
+        <p class="text-xs text-slate-300">Directing end-to-end sourcing strategy for Watermelon Kiran & Taiwan Guava with 99% dark-store fulfillment.</p>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Metrics & Analytics Dashboard</span> <i class="fa-solid fa-arrow-right"></i></div>
       </div>
 
       <!-- Gourmet Garden -->
-      <div onclick="openModal('gourmet')" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
+      <div onclick="openDeepDive('gourmet')" class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
         <div class="flex justify-between items-baseline">
           <h4 class="text-base font-bold text-white group-hover:text-teal-400 transition-colors">Sr. Sourcing Manager • Gourmet Garden</h4>
           <span class="text-xs font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded">03/2023</span>
         </div>
-        <p class="text-xs text-slate-300 line-clamp-2">Spearheaded F&V operations, optimizing direct collection center models and reducing market purchase contribution from 30% down to under 10%.</p>
+        <p class="text-xs text-slate-300">Optimized direct collection center models, reducing market purchase contribution from 30% down to under 10%.</p>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Metrics & Analytics Dashboard</span> <i class="fa-solid fa-arrow-right"></i></div>
       </div>
 
       <!-- Zomato -->
-      <div onclick="openModal('zomato')" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
+      <div onclick="openDeepDive('zomato')" class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
         <div class="flex justify-between items-baseline">
           <h4 class="text-base font-bold text-white group-hover:text-teal-400 transition-colors">Area Sourcing Manager • Zomato Hyperpure</h4>
           <span class="text-xs font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded">05/2022</span>
         </div>
-        <p class="text-xs text-slate-300 line-clamp-2">Optimized procurement costs and executed structured Collection Center projects to ensure reliable B2B supply chain performance.</p>
+        <p class="text-xs text-slate-300">Executed structured Collection Center projects and managed B2B supply chain reliability for HoReCa clients.</p>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Metrics & Analytics Dashboard</span> <i class="fa-solid fa-arrow-right"></i></div>
       </div>
     </div>
 
@@ -238,12 +228,12 @@
     <div class="bento-box p-6 space-y-4">
       <h4 class="text-xs font-mono text-teal-400 uppercase tracking-widest">Core Competencies</h4>
       <div class="flex flex-wrap gap-2 font-mono text-[11px] uppercase">
-        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-teal-500 transition-colors">Sourcing Strategy</span>
-        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-teal-500 transition-colors">Vendor Management</span>
-        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-teal-500 transition-colors">APMC Mandi Ops</span>
-        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-teal-500 transition-colors">Inventory Control</span>
-        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-teal-500 transition-colors">Quality Assurance</span>
-        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10 hover:border-teal-500 transition-colors">Supply Chain</span>
+        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">Sourcing Strategy</span>
+        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">Vendor Management</span>
+        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">APMC Mandi Ops</span>
+        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">Inventory Control</span>
+        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">Quality Assurance</span>
+        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 border border-white/10">Supply Chain</span>
       </div>
     </div>
 
@@ -257,29 +247,74 @@
         <a href="tel:+919206692624" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 hover:bg-teal-500/10 transition-all flex items-center gap-3 text-slate-200">
           <i class="fa-solid fa-phone text-teal-400"></i> +91 92066 92624
         </a>
-        <a href="mailto:contact@raghavendrag.com" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 hover:bg-teal-500/10 transition-all flex items-center gap-3 text-slate-200 truncate">
-          <i class="fa-solid fa-envelope text-teal-400"></i> contact@raghavendrag.com
+        <a href="mailto:contact@raghavendra.g0429@gmail.com" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 hover:bg-teal-500/10 transition-all flex items-center gap-3 text-slate-200 truncate">
+          <i class="fa-solid fa-envelope text-teal-400"></i> contact@raghavendra.g0429@gmail.com
         </a>
       </div>
     </div>
 
   </div>
 
-  <!-- Detailed Modal Popup View -->
-  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md hidden p-4">
-    <div class="bento-box max-w-xl w-full p-8 space-y-6 relative border border-teal-500/50 shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all">
+  <!-- IMMERSIVE FULL-SCREEN DEEP DIVE MODAL WITH CHARTS & ANIMATIONS -->
+  <div id="deepDiveModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-xl p-4 sm:p-6 lg:p-10 overflow-y-auto">
+    <div id="deepDiveContent" class="bento-box max-w-5xl w-full p-6 sm:p-10 space-y-8 relative border border-teal-500/50 shadow-2xl my-auto">
+      
+      <!-- Close Button -->
+      <button onclick="closeDeepDive()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-teal-500/20 hover:text-teal-400 flex items-center justify-center text-white transition-all text-lg">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <div class="space-y-1">
-        <span id="modalDate" class="text-xs font-mono text-teal-400"></span>
-        <h3 id="modalTitle" class="text-2xl font-bold text-white"></h3>
-        <p id="modalRole" class="text-xs font-mono text-slate-400 uppercase tracking-widest"></p>
+
+      <!-- Header Info -->
+      <div class="space-y-2 pr-12">
+        <span id="modalDateBadge" class="px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 font-mono text-xs font-semibold"></span>
+        <h2 id="modalCompanyName" class="text-3xl sm:text-4xl font-extrabold text-white"></h2>
+        <p id="modalRoleTitle" class="text-sm font-mono text-slate-400 uppercase tracking-widest"></p>
       </div>
-      <p id="modalDesc" class="text-slate-300 text-sm leading-relaxed border-t border-white/10 pt-4"></p>
-      <div class="pt-4 flex justify-end">
-        <button onclick="closeModal()" class="px-6 py-2 rounded-xl bg-teal-400 text-slate-950 font-mono font-bold text-xs uppercase hover:bg-teal-300 transition-all">Close</button>
+
+      <!-- Description & Impact Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-4">
+          <h3 class="text-xs font-mono text-teal-400 uppercase tracking-widest">Executive Summary</h3>
+          <p id="modalDescriptionText" class="text-slate-300 text-sm sm:text-base leading-relaxed"></p>
+          <div class="p-4 rounded-2xl bg-teal-500/10 border border-teal-500/20 space-y-1">
+            <span class="text-xs font-mono font-bold text-teal-300 uppercase">Key Operational Milestone</span>
+            <p id="modalMilestoneText" class="text-xs sm:text-sm text-slate-200"></p>
+          </div>
+        </div>
+
+        <!-- Quick Metric Highlights Card -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between space-y-4">
+          <h3 class="text-xs font-mono text-teal-400 uppercase tracking-widest">Performance KPI</h3>
+          <div class="text-center space-y-1">
+            <div id="modalMetricValue" class="text-4xl sm:text-5xl font-extrabold emerald-gradient font-mono"></div>
+            <div id="modalMetricLabel" class="text-xs text-slate-400 font-mono"></div>
+          </div>
+          <div class="text-[11px] font-mono text-slate-500 text-center">Verified Sourcing Data</div>
+        </div>
       </div>
+
+      <!-- ANIMATED CHARTS CONTAINER -->
+      <div class="space-y-4 pt-4 border-t border-white/10">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-mono text-teal-400 uppercase tracking-widest">Operational Analytics & Volume Growth</h3>
+          <span class="text-xs font-mono text-slate-400">Interactive Visualization</span>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+            <canvas id="performanceChart" height="140"></canvas>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+            <canvas id="efficiencyChart" height="140"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="pt-4 flex justify-end gap-4 border-t border-white/10">
+        <button onclick="closeDeepDive()" class="px-8 py-3 rounded-xl bg-teal-400 text-slate-950 font-mono font-bold text-xs uppercase hover:bg-teal-300 transition-all shadow-lg shadow-teal-500/20">Close Dashboard</button>
+      </div>
+
     </div>
   </div>
 
@@ -306,45 +341,126 @@
       });
     });
 
-    // Modal data and controls
-    const roleData = {
+    // Deep dive datasets for interactive charts
+    const database = {
       kamadhenu: {
         date: "08/2025 - Present",
-        title: "Kamadhenu Fresh Farms",
+        name: "Kamadhenu Fresh Farms",
         role: "Sourcing Lead",
-        desc: "Directing end-to-end sourcing strategy for Watermelon Kiran and Taiwan Guava (Pink & White Flesh), managing own-farm production, collection center procurement, and dark-store fulfillment for top Q-commerce platforms with 99% reliability."
+        desc: "Directing end-to-end sourcing strategy for Watermelon Kiran and Taiwan Guava (Pink & White Flesh), managing own-farm production, collection center procurement, and dark-store fulfillment for top Q-commerce platforms.",
+        milestone: "Established direct farmer linkages and optimized fresh produce transit times, ensuring 99% fulfillment reliability.",
+        metricVal: "99%",
+        metricLbl: "Dark Store Fulfillment Rate",
+        chart1Data: [85, 90, 93, 96, 99],
+        chart1Label: "Fulfillment Reliability (%)",
+        chart2Data: [120, 180, 240, 310, 450],
+        chart2Label: "Produce Volume Managed (Tons)"
       },
       gourmet: {
         date: "03/2023 - 03/2025",
-        title: "Gourmet Garden",
+        name: "Gourmet Garden",
         role: "Sr. Sourcing Manager",
-        desc: "Spearheaded F&V category operations across key sourcing clusters, successfully optimizing direct collection center models and reducing market purchase contribution from 30% down to under 10%."
+        desc: "Spearheaded F&V category operations across key sourcing clusters. Successfully optimized direct collection center models and eliminated middleman dependencies.",
+        milestone: "Successfully reduced market purchase contribution from 30% down to under 10%, drastically improving gross margins and produce freshness.",
+        metricVal: "<10%",
+        metricLbl: "Market Purchase Contribution",
+        chart1Data: [30, 24, 18, 14, 8],
+        chart1Label: "Market Purchase Ratio (%)",
+        chart2Data: [50, 65, 80, 92, 98],
+        chart2Label: "Direct Collection Efficiency (%)"
       },
       zomato: {
         date: "05/2022 - 12/2022",
-        title: "Zomato Hyperpure",
+        name: "Zomato Hyperpure",
         role: "Area Sourcing Manager",
-        desc: "Managed supplier relationships, optimized procurement costs, and executed structured Collection Center projects to ensure reliable B2B supply chain performance for HoReCa clients."
+        desc: "Managed supplier relationships, optimized procurement costs, and executed structured Collection Center projects to ensure reliable B2B supply chain performance for HoReCa clients.",
+        milestone: "Streamlined vendor payout cycles and scaled regional B2B inventory availability across multiple metropolitan fulfillment hubs.",
+        metricVal: "100%",
+        metricLbl: "B2B Fulfillment SLA",
+        chart1Data: [70, 78, 85, 92, 100],
+        chart1Label: "SLA Compliance (%)",
+        chart2Data: [40, 55, 70, 85, 110],
+        chart2Label: "B2B Volume Handled (Tons)"
       }
     };
 
-    function openModal(key) {
-      const item = roleData[key];
-      document.getElementById('modalDate').innerText = item.date;
-      document.getElementById('modalTitle').innerText = item.title;
-      document.getElementById('modalRole').innerText = item.role;
-      document.getElementById('modalDesc').innerText = item.desc;
-      document.getElementById('detailModal').classList.remove('hidden');
+    let pChart = null;
+    let eChart = null;
+
+    function openDeepDive(key) {
+      const data = database[key];
+      document.getElementById('modalDateBadge').innerText = data.date;
+      document.getElementById('modalCompanyName').innerText = data.name;
+      document.getElementById('modalRoleTitle').innerText = data.role;
+      document.getElementById('modalDescriptionText').innerText = data.desc;
+      document.getElementById('modalMilestoneText').innerText = data.milestone;
+      document.getElementById('modalMetricValue').innerText = data.metricVal;
+      document.getElementById('modalMetricLabel').innerText = data.metricLbl;
+
+      const modal = document.getElementById('deepDiveModal');
+      modal.classList.add('active');
+
+      // Render Charts
+      if (pChart) pChart.destroy();
+      if (eChart) eChart.destroy();
+
+      const ctx1 = document.getElementById('performanceChart').getContext('2d');
+      pChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Current'],
+          datasets: [{
+            label: data.chart1Label,
+            data: data.chart1Data,
+            borderColor: '#2dd4bf',
+            backgroundColor: 'rgba(45, 212, 191, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } } },
+          scales: {
+            x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+
+      const ctx2 = document.getElementById('efficiencyChart').getContext('2d');
+      eChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: ['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'Optimized'],
+          datasets: [{
+            label: data.chart2Label,
+            data: data.chart2Data,
+            backgroundColor: '#06b6d4',
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } } },
+          scales: {
+            x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
     }
 
-    function closeModal() {
-      document.getElementById('detailModal').classList.add('hidden');
+    function closeDeepDive() {
+      const modal = document.getElementById('deepDiveModal');
+      modal.classList.remove('active');
     }
 
     window.onclick = function(event) {
-      const modal = document.getElementById('detailModal');
+      const modal = document.getElementById('deepDiveModal');
       if (event.target === modal) {
-        closeModal();
+        closeDeepDive();
       }
     }
   </script>
