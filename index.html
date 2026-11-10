@@ -183,7 +183,7 @@
       </div>
     </div>
 
-    <!-- 6. Detailed Career Track Card (Click any to open immersive visualization suite) -->
+    <!-- 6. Detailed Career Track Card (All 5 Roles Included) -->
     <div id="experience" class="md:col-span-2 lg:col-span-2 row-span-2 bento-box p-8 space-y-6 overflow-y-auto max-h-[600px]">
       <div class="border-b border-white/10 pb-4 flex justify-between items-center">
         <div>
@@ -200,7 +200,7 @@
           <span class="text-xs font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded">08/2025</span>
         </div>
         <p class="text-xs text-slate-300">Directing end-to-end sourcing strategy for Watermelon Kiran & Taiwan Guava with 99% dark-store fulfillment.</p>
-        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Metrics & Analytics Dashboard</span> <i class="fa-solid fa-arrow-right"></i></div>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Analytics & Graphs</span> <i class="fa-solid fa-arrow-right"></i></div>
       </div>
 
       <!-- Gourmet Garden -->
@@ -210,7 +210,7 @@
           <span class="text-xs font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded">03/2023</span>
         </div>
         <p class="text-xs text-slate-300">Optimized direct collection center models, reducing market purchase contribution from 30% down to under 10%.</p>
-        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Metrics & Analytics Dashboard</span> <i class="fa-solid fa-arrow-right"></i></div>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Analytics & Graphs</span> <i class="fa-solid fa-arrow-right"></i></div>
       </div>
 
       <!-- Zomato -->
@@ -220,7 +220,27 @@
           <span class="text-xs font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded">05/2022</span>
         </div>
         <p class="text-xs text-slate-300">Executed structured Collection Center projects and managed B2B supply chain reliability for HoReCa clients.</p>
-        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Metrics & Analytics Dashboard</span> <i class="fa-solid fa-arrow-right"></i></div>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Analytics & Graphs</span> <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+
+      <!-- EDLP Retail -->
+      <div onclick="openDeepDive('edlp')" class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
+        <div class="flex justify-between items-baseline">
+          <h4 class="text-base font-bold text-white group-hover:text-teal-400 transition-colors">Sourcing & Category Manager • EDLP Retail</h4>
+          <span class="text-xs font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded">05/2020</span>
+        </div>
+        <p class="text-xs text-slate-300">Managed 5,000+ FMCG SKUs, maintaining 95% acquisition success rate across 50+ leading brand distributors.</p>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Analytics & Graphs</span> <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+
+      <!-- Ninjacart -->
+      <div onclick="openDeepDive('ninjacart')" class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-500 cursor-pointer transition-all space-y-2 group">
+        <div class="flex justify-between items-baseline">
+          <h4 class="text-base font-bold text-white group-hover:text-teal-400 transition-colors">Sourcing Senior Executive • Ninjacart</h4>
+          <span class="text-xs font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded">04/2017</span>
+        </div>
+        <p class="text-xs text-slate-300">Scaled onion procurement to 250 tons for weekend sales across multiple regional fulfillment hubs.</p>
+        <div class="text-[11px] font-mono text-teal-400 flex items-center gap-1 pt-1"><span>View Analytics & Graphs</span> <i class="fa-solid fa-arrow-right"></i></div>
       </div>
     </div>
 
@@ -247,8 +267,8 @@
         <a href="tel:+919206692624" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 hover:bg-teal-500/10 transition-all flex items-center gap-3 text-slate-200">
           <i class="fa-solid fa-phone text-teal-400"></i> +91 92066 92624
         </a>
-        <a href="mailto:contact@raghavendra.g0429@gmail.com" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 hover:bg-teal-500/10 transition-all flex items-center gap-3 text-slate-200 truncate">
-          <i class="fa-solid fa-envelope text-teal-400"></i> contact@raghavendra.g0429@gmail.com
+        <a href="mailto:contact@raghavendrag.com" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-teal-500 hover:bg-teal-500/10 transition-all flex items-center gap-3 text-slate-200 truncate">
+          <i class="fa-solid fa-envelope text-teal-400"></i> contact@raghavendrag.com
         </a>
       </div>
     </div>
@@ -341,7 +361,7 @@
       });
     });
 
-    // Deep dive datasets for interactive charts
+    // Deep dive datasets for interactive charts across all 5 roles
     const database = {
       kamadhenu: {
         date: "08/2025 - Present",
@@ -381,6 +401,32 @@
         chart1Label: "SLA Compliance (%)",
         chart2Data: [40, 55, 70, 85, 110],
         chart2Label: "B2B Volume Handled (Tons)"
+      },
+      edlp: {
+        date: "05/2020 - 02/2022",
+        name: "EDLP Retail Solutions Private Limited",
+        role: "Sourcing & Category Manager",
+        desc: "Managed 5,000+ FMCG SKUs, maintaining a high acquisition success rate across leading brand distributors including HUL, ITC, and Amul.",
+        milestone: "Maintained a 95% product acquisition success rate across 50+ brand distributors with optimized inventory holding costs.",
+        metricVal: "95%",
+        metricLbl: "Acquisition Success Rate",
+        chart1Data: [80, 85, 88, 92, 95],
+        chart1Label: "Acquisition Success (%)",
+        chart2Data: [1000, 2000, 3500, 4200, 5000],
+        chart2Label: "FMCG SKUs Managed"
+      },
+      ninjacart: {
+        date: "04/2017 - 04/2020",
+        name: "Ninjacart",
+        role: "Sourcing Senior Executive",
+        desc: "Scaled onion procurement to 250 tons for weekend sales across multiple regional fulfillment hubs and trained multi-city vendor operational teams.",
+        milestone: "Successfully executed massive volume surges (250 tons of onions) during high-demand weekend promotional events without stockouts.",
+        metricVal: "250T",
+        metricLbl: "Weekend Onion Procurement",
+        chart1Data: [50, 90, 140, 190, 250],
+        chart1Label: "Onion Volume Surge (Tons)",
+        chart2Data: [88, 92, 95, 98, 100],
+        chart2Label: "Vendor Team Efficiency (%)"
       }
     };
 
@@ -408,7 +454,7 @@
       pChart = new Chart(ctx1, {
         type: 'line',
         data: {
-          labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Current'],
+          labels: ['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'Optimized'],
           datasets: [{
             label: data.chart1Label,
             data: data.chart1Data,
