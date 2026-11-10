@@ -48,7 +48,6 @@
     }
     #preloader.fade-out { opacity: 0; visibility: hidden; }
 
-    /* Moving Marquee Animation for Name Banner */
     @keyframes marquee {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -157,7 +156,7 @@
         </div>
       </div>
 
-      <!-- Top Profile Row: Left (Quote/Domain) + Right (Full Uncropped Photo Box) -->
+      <!-- Top Profile Row -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         <!-- Left Box -->
@@ -184,7 +183,6 @@
 
         <!-- Right Box: Full Uncropped Photo Frame -->
         <div class="lg:col-span-5 editorial-card p-6 flex flex-col justify-between">
-          <!-- Using object-contain and padding so hair and full head fit completely without cropping -->
           <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden relative border border-[#c58a5d]/20 bg-[#12100e] flex items-center justify-center p-2">
             <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-contain filter contrast-105" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
           </div>
@@ -309,7 +307,7 @@
         </div>
       </div>
 
-      <!-- Featured Work / Experience Grid -->
+      <!-- Featured Work & Experience (All 5 Roles including Ninjacart) -->
       <div class="lg:col-span-7 editorial-card p-8 space-y-6">
         <div class="flex items-center justify-between">
           <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Featured Work & Experience</div>
@@ -344,6 +342,13 @@
             <h3 class="font-display font-bold text-base text-[#f3f0ec] group-hover:text-[#c58a5d] transition-colors">EDLP Retail Solutions</h3>
             <div class="font-mono text-xs text-[#a39e93] uppercase">Sourcing & Category Manager</div>
             <p class="text-xs text-[#a39e93] leading-relaxed">Managed 5,000+ FMCG SKUs across 50+ brand distributors.</p>
+          </div>
+
+          <div onclick="openDeepDive('ninjacart')" class="editorial-card p-6 space-y-3 cursor-pointer group sm:col-span-2">
+            <div class="font-mono text-[10px] text-[#a39e93]">04/2017 - 04/2020</div>
+            <h3 class="font-display font-bold text-base text-[#f3f0ec] group-hover:text-[#c58a5d] transition-colors">Ninjacart</h3>
+            <div class="font-mono text-xs text-[#a39e93] uppercase">Sourcing Senior Executive</div>
+            <p class="text-xs text-[#a39e93] leading-relaxed">Scaled onion procurement to 250 tons for weekend sales across regional hubs.</p>
           </div>
 
         </div>
@@ -398,7 +403,7 @@
 
     </div>
 
-    <!-- LET'S COLLABORATE & SCAN TO CONNECT -->
+    <!-- LET'S COLLABORATE & WORKING SOCIAL LINKS -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
       
       <div class="lg:col-span-7 editorial-card p-8 space-y-6">
@@ -422,17 +427,22 @@
         </div>
       </div>
 
+      <!-- Working Social Links matching Pinterest layout -->
       <div class="lg:col-span-5 editorial-card p-8 flex flex-col justify-between text-center space-y-6">
-        <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Scan to Connect</div>
-        <div class="flex justify-center gap-6">
-          <div class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30">
-            <i class="fa-brands fa-linkedin text-[#c58a5d] text-4xl mb-2"></i>
-            <div class="font-mono text-[10px] text-[#a39e93]">LinkedIn</div>
-          </div>
-          <div class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30">
-            <i class="fa-brands fa-instagram text-[#c58a5d] text-4xl mb-2"></i>
-            <div class="font-mono text-[10px] text-[#a39e93]">Instagram</div>
-          </div>
+        <div class="font-mono text-xs text-[#c58a5d] uppercase tracking-widest">Connect Online</div>
+        <div class="grid grid-cols-3 gap-3">
+          <a href="https://www.linkedin.com/in/raghavendra-g-164561166" target="_blank" class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30 hover:border-[#c58a5d] hover:bg-[#c58a5d]/10 transition-all flex flex-col items-center text-[#f3f0ec]">
+            <i class="fa-brands fa-linkedin text-[#c58a5d] text-2xl mb-1"></i>
+            <span class="font-mono text-[10px] text-[#a39e93]">LinkedIn</span>
+          </a>
+          <a href="https://instagram.com/Itsmeraghavendra.g" target="_blank" class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30 hover:border-[#c58a5d] hover:bg-[#c58a5d]/10 transition-all flex flex-col items-center text-[#f3f0ec]">
+            <i class="fa-brands fa-instagram text-[#c58a5d] text-2xl mb-1"></i>
+            <span class="font-mono text-[10px] text-[#a39e93]">Instagram</span>
+          </a>
+          <a href="https://twitter.com/Raghavendragps" target="_blank" class="p-3 rounded-2xl bg-[#12100e] border border-[#c58a5d]/30 hover:border-[#c58a5d] hover:bg-[#c58a5d]/10 transition-all flex flex-col items-center text-[#f3f0ec]">
+            <i class="fa-brands fa-x-twitter text-[#c58a5d] text-2xl mb-1"></i>
+            <span class="font-mono text-[10px] text-[#a39e93]">X (Twitter)</span>
+          </a>
         </div>
         <div class="font-display font-bold uppercase tracking-widest text-xs text-[#a39e93] pt-4 border-t border-[#c58a5d]/15">
           Designing Experiences. Building Connections.
@@ -573,6 +583,19 @@
         chart1Label: "Acquisition Success (%)",
         chart2Data: [1000, 2000, 3500, 4200, 5000],
         chart2Label: "FMCG SKUs Managed"
+      },
+      ninjacart: {
+        date: "04/2017 - 04/2020",
+        name: "Ninjacart",
+        role: "Sourcing Senior Executive",
+        desc: "Scaled onion procurement to 250 tons for weekend sales across multiple regional fulfillment hubs and trained multi-city vendor operational teams.",
+        milestone: "Successfully executed massive volume surges (250 tons of onions) during high-demand weekend promotional events without stockouts.",
+        metricVal: "250T",
+        metricLbl: "Weekend Onion Procurement",
+        chart1Data: [50, 90, 140, 190, 250],
+        chart1Label: "Onion Volume Surge (Tons)",
+        chart2Data: [88, 92, 95, 98, 100],
+        chart2Label: "Vendor Team Efficiency (%)"
       }
     };
 
