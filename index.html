@@ -88,15 +88,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ANIMATED ORBIT RING FOR PHOTO */
-    @keyframes spinSlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .orbit-ring {
-      animation: spinSlow 20s linear infinite;
-    }
-
     @keyframes slideUpFade {
       from { opacity: 0; transform: translateY(50px); }
       to { opacity: 1; transform: translateY(0); }
@@ -128,7 +119,7 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pink-500 to-cyan-400 flex items-center justify-center text-white font-bold font-mono text-2xl shadow-2xl shadow-pink-500/30 animate-bounce mb-4">RG</div>
-    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Animation Suite...</div>
+    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Full Photo Asset...</div>
   </div>
 
   <div class="neon-blob top-10 left-10"></div>
@@ -156,7 +147,7 @@
 
   <main class="max-w-7xl mx-auto px-6 pt-32 pb-24 space-y-24 relative z-10">
     
-    <!-- HERO SECTION WITH INTERACTIVE ANIMATED PHOTO CANVAS -->
+    <!-- HERO SECTION WITH UN-CROPPED FULL PHOTO -->
     <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh] animate-scroll">
       <div class="lg:col-span-8 dribbble-card p-8 sm:p-12 space-y-8 flex flex-col justify-between">
         <div class="space-y-6">
@@ -191,23 +182,15 @@
         </div>
       </div>
 
-      <!-- ANIMATED 3D GLOW PHOTO FRAME CARD -->
-      <div class="lg:col-span-4 dribbble-card p-4 flex flex-col items-center justify-center group h-full min-h-[480px] relative">
-        <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-transparent to-pink-500/10 pointer-events-none"></div>
-        
-        <!-- Rotating Orbit Ring Effect -->
-        <div class="absolute w-72 h-72 rounded-full border border-dashed border-pink-500/30 orbit-ring pointer-events-none"></div>
-        
-        <div class="w-full h-80 rounded-2xl overflow-hidden relative shadow-2xl z-10 border border-indigo-500/30">
-          <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-transform duration-700" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#090b14] via-transparent to-transparent opacity-60"></div>
+      <!-- FULL UN-CROPPED PHOTO & TABLE CARD -->
+      <div class="lg:col-span-4 dribbble-card p-6 flex flex-col items-center justify-between group h-full min-h-[500px]">
+        <div class="w-full h-80 rounded-2xl overflow-hidden relative bg-slate-950/60 border border-indigo-500/20 flex items-center justify-center p-2">
+          <!-- object-contain ensures the FULL photo is shown without cropping -->
+          <img src="Itsmeraghavendra.png" alt="Raghavendra G" class="w-full h-full object-contain filter contrast-105 group-hover:scale-105 transition-transform duration-700" onerror="this.src='Raghavendra-photo.jpg.jpeg'">
         </div>
 
-        <div class="mt-4 z-10 text-center space-y-1">
-          <div class="font-display font-bold text-white text-base tracking-wide flex items-center justify-center gap-2">
-            <span>Raghavendra G</span>
-            <span class="w-2 h-2 rounded-full bg-pink-500 animate-ping"></span>
-          </div>
+        <div class="w-full mt-4 pt-4 border-t border-indigo-500/20 text-center space-y-1">
+          <div class="font-display font-bold text-white text-base tracking-wide">Raghavendra G</div>
           <div class="font-mono text-xs text-pink-400 uppercase tracking-widest">Sourcing & Operations Lead</div>
         </div>
       </div>
