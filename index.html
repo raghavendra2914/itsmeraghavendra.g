@@ -30,8 +30,8 @@
   <style>
     :root {
       --bg-core: #090b14;
-      --card-bg: rgba(18, 24, 42, 0.75);
-      --border-color: rgba(99, 102, 241, 0.25);
+      --card-bg: rgba(18, 24, 42, 0.8);
+      --border-color: rgba(99, 102, 241, 0.3);
     }
     body { background-color: var(--bg-core); color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     
@@ -48,21 +48,23 @@
     }
     #preloader.fade-out { opacity: 0; visibility: hidden; }
 
+    /* Floating Neon Orbs */
     .neon-blob {
       position: absolute;
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, rgba(129, 140, 248, 0.18) 0%, rgba(236, 72, 153, 0.08) 50%, transparent 70%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.2) 0%, rgba(236, 72, 153, 0.1) 50%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 0;
-      animation: floatBlob 8s ease-in-out infinite alternate;
+      animation: floatBlob 7s ease-in-out infinite alternate;
     }
     @keyframes floatBlob {
       0% { transform: translateY(0px) scale(1); }
-      100% { transform: translateY(40px) scale(1.15); }
+      100% { transform: translateY(50px) scale(1.15); }
     }
 
+    /* Dribbble Bento Card */
     .dribbble-card {
       background: var(--card-bg);
       backdrop-filter: blur(24px);
@@ -72,12 +74,12 @@
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     }
     .dribbble-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(129, 140, 248, 0.6);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(129, 140, 248, 0.2);
+      transform: translateY(-8px) scale(1.01);
+      border-color: rgba(236, 72, 153, 0.6);
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(236, 72, 153, 0.25);
     }
 
     .electric-gradient {
@@ -86,15 +88,13 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* SCROLL REVEAL ANIMATION CLASSES */
-    .reveal-on-scroll {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* SILKY SCROLL ENTRANCE ANIMATIONS */
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .reveal-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .animate-scroll {
+      animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     #deepDiveModal {
@@ -120,7 +120,7 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pink-500 to-cyan-400 flex items-center justify-center text-white font-bold font-mono text-2xl shadow-2xl shadow-pink-500/30 animate-bounce mb-4">RG</div>
-    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Cinematic Portfolio...</div>
+    <div class="font-mono text-xs text-indigo-300 uppercase tracking-widest animate-pulse">Loading Motion Portfolio...</div>
   </div>
 
   <div class="neon-blob top-10 left-10"></div>
@@ -146,10 +146,10 @@
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-6 pt-32 pb-24 space-y-20 relative z-10">
+  <main class="max-w-7xl mx-auto px-6 pt-32 pb-24 space-y-24 relative z-10">
     
     <!-- HERO SECTION -->
-    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh] reveal-on-scroll">
+    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[80vh] animate-scroll">
       <div class="lg:col-span-8 dribbble-card p-8 sm:p-12 space-y-8 flex flex-col justify-between">
         <div class="space-y-6">
           <div class="flex items-center justify-between flex-wrap gap-4">
@@ -197,7 +197,7 @@
     </section>
 
     <!-- TIMELINE SECTION -->
-    <section id="timeline" class="dribbble-card p-8 sm:p-12 space-y-8 reveal-on-scroll">
+    <section id="timeline" class="dribbble-card p-8 sm:p-12 space-y-8 animate-scroll">
       <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
         <div>
           <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Career Evolution</span>
@@ -207,22 +207,22 @@
       </div>
       
       <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
           <div class="font-mono text-xs text-pink-400">2017 - 2020</div>
           <div class="font-bold text-white text-sm">Ninjacart</div>
           <div class="text-xs text-slate-400">Sourcing Senior Executive</div>
         </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
           <div class="font-mono text-xs text-indigo-400">2020 - 2022</div>
           <div class="font-bold text-white text-sm">EDLP Retail</div>
           <div class="text-xs text-slate-400">Category Manager</div>
         </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
           <div class="font-mono text-xs text-cyan-400">2022 - 2022</div>
           <div class="font-bold text-white text-sm">Zomato Hyperpure</div>
           <div class="text-xs text-slate-400">Area Sourcing Manager</div>
         </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 transition-all">
+        <div class="p-4 rounded-xl bg-white/5 border border-indigo-500/30 space-y-2 hover:border-pink-500 hover:scale-105 transition-all">
           <div class="font-mono text-xs text-pink-400">2023 - 2025</div>
           <div class="font-bold text-white text-sm">Gourmet Garden</div>
           <div class="text-xs text-slate-400">Sr. Sourcing Manager</div>
@@ -236,7 +236,7 @@
     </section>
 
     <!-- ROI CALCULATOR SECTION -->
-    <section id="calculator" class="dribbble-card p-8 sm:p-12 space-y-8 border border-pink-500/30 reveal-on-scroll">
+    <section id="calculator" class="dribbble-card p-8 sm:p-12 space-y-8 border border-pink-500/30 animate-scroll">
       <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
         <div>
           <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Value Simulator</span>
@@ -267,7 +267,7 @@
     </section>
 
     <!-- EXPERIENCE SECTION -->
-    <section id="experience" class="space-y-8 pt-6 reveal-on-scroll">
+    <section id="experience" class="space-y-8 pt-6 animate-scroll">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-indigo-500/20 pb-6">
         <div>
           <span class="text-xs font-mono text-indigo-400 uppercase tracking-widest">02. Career Trajectory</span>
@@ -377,7 +377,7 @@
     </section>
 
     <!-- CORE COMPETENCIES SECTION -->
-    <section id="competencies" class="dribbble-card p-8 sm:p-12 space-y-8 reveal-on-scroll">
+    <section id="competencies" class="dribbble-card p-8 sm:p-12 space-y-8 animate-scroll">
       <div>
         <span class="text-xs font-mono text-indigo-400 uppercase tracking-widest">03. Expertise & Operations</span>
         <h2 class="text-3xl font-display font-bold text-white mt-1">Core Competencies, Skills & Languages</h2>
@@ -439,7 +439,7 @@
     </section>
 
     <!-- TESTIMONIALS SECTION -->
-    <section class="dribbble-card p-8 sm:p-12 space-y-6 reveal-on-scroll">
+    <section class="dribbble-card p-8 sm:p-12 space-y-6 animate-scroll">
       <div class="flex items-center justify-between border-b border-indigo-500/20 pb-4">
         <h3 class="text-xs font-mono text-pink-400 uppercase tracking-widest">Leadership & Stakeholder Endorsements</h3>
         <span class="text-xs font-mono text-slate-400">Verified Feedback</span>
@@ -457,7 +457,7 @@
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="dribbble-card p-10 sm:p-14 text-center space-y-8 border border-pink-500/30 reveal-on-scroll">
+    <section id="contact" class="dribbble-card p-10 sm:p-14 text-center space-y-8 border border-pink-500/30 animate-scroll">
       <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">04. Connect & Collaborate</span>
       <h2 class="text-4xl font-display font-bold text-white">Let's Discuss Sourcing Leadership</h2>
       <p class="text-slate-300 text-base max-w-xl mx-auto">Ready to scale supply chains, optimize procurement margins, and drive operational excellence? Reach out directly.</p>
@@ -545,20 +545,6 @@
       setTimeout(() => {
         document.getElementById('preloader').classList.add('fade-out');
       }, 400);
-    });
-
-    // Scroll Reveal Observer for silky smooth entry animations on scroll
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal-on-scroll').forEach(section => {
-      observer.observe(section);
     });
 
     // ROI Calculator
